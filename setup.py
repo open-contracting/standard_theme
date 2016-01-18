@@ -5,21 +5,16 @@
 
 """
 from setuptools import setup
-from sphinx_rtd_theme import __version__
 
 
 setup(
-    name='sphinx_rtd_theme',
-    version=__version__,
-    url='https://github.com/snide/sphinx_rtd_theme/',
-    license='MIT',
-    author='Dave Snider',
-    author_email='dave.snider@gmail.com',
-    description='ReadTheDocs.org theme for Sphinx, 2013 version.',
+    name='standard_theme',
+    url='https://github.com/open-contracting/standard_theme/',
+    description='Derived from ReadTheDocs.org theme for Sphinx, 2013 version.',
     long_description=open('README.rst').read(),
     zip_safe=False,
-    packages=['sphinx_rtd_theme'],
-    package_data={'sphinx_rtd_theme': [
+    packages=['standard_theme'],
+    package_data={'standard_theme': [
         'theme.conf',
         '*.html',
         'static/css/*.css',
