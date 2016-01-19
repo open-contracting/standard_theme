@@ -129,10 +129,10 @@ module.exports = function(grunt) {
         tasks: ['sass:dev']
       },
       /* Changes in theme dir rebuild sphinx */
-      sphinx: {
-        files: ['standard_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
-        tasks: ['clean:build','exec:build_sphinx']
-      },
+      //sphinx: {
+      //  files: ['standard_theme/**/*', 'demo_docs/**/*.rst', 'demo_docs/**/*.py'],
+      //  tasks: ['clean:build','exec:build_sphinx']
+      //},
       /* JavaScript */
       browserify: {
         files: ['js/*.js'],
@@ -157,7 +157,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('fonts', ['clean:fonts','copy:fonts']);
-  grunt.registerTask('default', ['exec:bower_update','clean:build','sass:dev','browserify:dev','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['exec:bower_update','clean:build','sass:build','browserify:build','exec:build_sphinx']);
+  grunt.registerTask('default', ['exec:bower_update','clean:build','sass:dev','browserify:dev',/*'exec:build_sphinx',*/'connect','open','watch']);
+  grunt.registerTask('build', ['exec:bower_update','clean:build','sass:build','browserify:build',/*'exec:build_sphinx'*/]);
 }
 
