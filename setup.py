@@ -11,7 +11,6 @@ setup(
     name='standard_theme',
     url='https://github.com/open-contracting/standard_theme/',
     description='Derived from ReadTheDocs.org theme for Sphinx, 2013 version.',
-    long_description=open('README.rst').read(),
     zip_safe=False,
     packages=['standard_theme'],
     package_data={'standard_theme': [
