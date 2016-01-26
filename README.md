@@ -48,3 +48,13 @@ Once finished with changes:
 * commit changes to the standard_theme repo
 
 
+## Translations
+
+The theme uses babel's setup.py integration for translations:
+
+```
+# create the pot file
+python setup.py extract_messages
+# update the po files
+python setup.py update_catalog
+```
