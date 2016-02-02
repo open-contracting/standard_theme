@@ -95,7 +95,7 @@
       color: darken($menu-link-medium, 30%)
 
   // This is the on state for pages beyond second level
-  li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3
+  li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3, li.toctree-l3.current li.toctree-l4
     > ul
       display: none
     &.current > ul
@@ -130,6 +130,23 @@
     span.toctree-expand
       color: darken($menu-vertical-background-color, 40%)
   li.toctree-l4
+    font-size: .9em
+    &.current
+      > a
+        background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 4 $gutter * 3.5
+      li.toctree-l5 > a
+        display: block
+        background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 4 $gutter * 4.5
+        border-top: none
+        border-bottom: none
+    a:hover span.toctree-expand
+      color: $menu-link-medium
+    span.toctree-expand
+      color: darken($menu-vertical-background-color, 40%)
+
+  li.toctree-l5
     font-size: .9em
 
   li.current ul
@@ -245,22 +262,53 @@
     left: auto
     opacity: 0
 
+.oc-fixed-header
+  width: 100%
+  height: 185px
+  background-color: #373738
+
+.oc-fixed-header a
+  margin: 33px 0
+  display: inline-block
+  line-height: 1.4px 
+
+.oc-fixed-header .wrapper
+  margin-left: 20px
+  margin-right: 20px
+  width: 100%
+
+.oc-fixed-header svg
+  width: 482px
+  height: 38px
+
+.oc-header-bottom
+  border-top: 1px solid #69696B
+
+.oc-header-bottom h2
+  margin-top: 20px
+  color: white
+
+.oc-header-bottom h2 small
+  color: #9BAF00
 
 .wy-body-for-nav
-  background: left repeat-y $section-background-color
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxOERBMTRGRDBFMUUxMUUzODUwMkJCOThDMEVFNURFMCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxOERBMTRGRTBFMUUxMUUzODUwMkJCOThDMEVFNURFMCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE4REExNEZCMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjE4REExNEZDMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+EwrlwAAAAA5JREFUeNpiMDU0BAgwAAE2AJgB9BnaAAAAAElFTkSuQmCC)
-  background-size: $nav-desktop-width 1px
+  background-color: white
 
 .wy-grid-for-nav
   position: absolute
   width: 100%
   height: 100%
+  top: 185px
+
+.affix
+  position: fixed !important
 
 .wy-nav-side
-  position: fixed
-  top: 0
-  bottom: 0
-  left: 0
+  position: absolute
+  float: left
+  top: 0px
+  bottom: 0px
+  left: 0px
   padding-bottom: 2em
   width: $nav-desktop-width
   overflow-x: hidden
@@ -278,7 +326,7 @@
 
 .wy-nav-top
   display: none
-  background: $link-color
+  background: $nav-search-background-color
   color: $white
   padding: $gutter / 4 $gutter / 2
   position: relative
@@ -382,13 +430,13 @@ footer
       position: fixed
       min-width: 100%
       left: 85%
-      top: 0
+      top: 185px
       height: 100%
       overflow: hidden
 
 +media($desktop-wider)
   .wy-nav-content-wrap
-    background: rgba(0,0,0,.05)
+    background: #373738 
   .wy-nav-content
     margin: 0
     background: $section-background-color
@@ -398,3 +446,7 @@ footer
     display: none
   .wy-nav-content-wrap
     margin-left: 0
+
+.wy-table-responsive table td
+  white-space: normal !important
+
