@@ -4515,6 +4515,7 @@ div[class^='highlight'] pre {
   height: 50px;
   width: 80px;
   display: inline-block;
+  float: left;
 }
 
 .oc-logo {
@@ -4526,9 +4527,13 @@ div[class^='highlight'] pre {
   margin-left: 15px;
   margin-bottom: 0px;
   display: inline-block;
-  position: relative;
-  bottom: 15px;
+  color: white;
+}
+
+.oc-logo h2 small, .oc-logo .rst-content .toctree-wrapper p.caption small, .rst-content .toctree-wrapper .oc-logo p.caption small {
   color: #B6C505;
+  position: relative;
+  bottom: 5px;
 }
 
 .oc-search-icon {
