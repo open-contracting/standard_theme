@@ -120,12 +120,12 @@
             {% endif %}
           {% endif %}
           --!>
-          <a class="oc-logo-text">
+          <a class="oc-logo-text" href="http://open-contracting.org">
             <svg>
               <use xlink:href="#ocp-logo-text" />
             </svg>
           </a>
-          <a class="oc-logo" href="/">
+          <a class="oc-logo" href="{{ pathto(master_doc) }}">
             <svg>
               <use xlink:href="#ocp-logo-only" />
             </svg>
@@ -149,6 +149,9 @@
                 <!-- Local TOC -->
                 <div class="local-toc">{{ toc }}</div>
             {% endif %}
+            <ul class="oc-extra-nav">
+               <li class="toctree-l1"><a class="reference internal" href="/validator/">Validator</a></li>
+            </ul>
           {% endblock %}
         </div>
       </div>

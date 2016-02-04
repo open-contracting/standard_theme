@@ -4589,6 +4589,10 @@ div[class^='highlight'] pre {
   margin-right: 30px;
 }
 
+.oc-extra-nav {
+  margin-top: 15px;
+}
+
 .wy-body-for-nav {
   background-color: white;
 }
