@@ -4646,6 +4646,8 @@ div[class^='highlight'] pre {
 .wy-nav-top a {
   color: #fff;
   font-weight: bold;
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 25px;
 }
 .wy-nav-top img {
   margin-right: 12px;
@@ -4660,6 +4662,9 @@ div[class^='highlight'] pre {
   float: left;
   cursor: pointer;
   padding-top: inherit;
+}
+.wy-nav-top small {
+  color: #B6C505;
 }
 
 .wy-nav-content-wrap {
