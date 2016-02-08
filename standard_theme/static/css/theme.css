@@ -4377,7 +4377,7 @@ div[class^='highlight'] pre {
   padding: 0.53933em 1.618em;
   display: block;
   position: relative;
-  font-size: 115%;
+  font-size: 105%;
   color: white;
   font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -4769,7 +4769,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   padding-top: 24px;
 }
 #search-results .search li a {
-  font-size: 120%;
+  font-size: 110%;
   margin-bottom: 12px;
   display: inline-block;
 }
