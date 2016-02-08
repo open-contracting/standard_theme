@@ -46,11 +46,11 @@
     &.divide-bottom
       border-bottom: solid 1px hsl(0, 0%, 25%)
     &.current
-      background: darken($menu-vertical-background-color, 10%)
+      background: white
       a
-        color: $menu-link-medium
-        border-right: solid 1px darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 1.5
+        color: black
+        //border-right: solid 1px darken($menu-vertical-background-color, 20%)
+        padding: $gutter / 3 $gutter * 1.5
         &:hover
           background: darken($menu-vertical-background-color, 15%)
     code
@@ -73,13 +73,13 @@
   // On state for the first level
   li.on a, li.current > a
     color: $menu-link-color
-    padding: $gutter / 4 $gutter
+    padding: $gutter / 3 $gutter
     font-weight: bold
     position: relative
-    background: $menu-vertical-background-color
+    background: white
     border: none
-    border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
-    border-top: solid 1px darken($menu-vertical-background-color, 20%)
+    //border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
+    //border-top: solid 1px darken($menu-vertical-background-color, 20%)
     padding-left: $gutter -4px
     +font-smooth
     &:hover
@@ -103,12 +103,12 @@
   li.toctree-l2
     &.current
       > a
-        background: darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 1.5
+        //background: darken($menu-vertical-background-color, 20%)
+        padding: $gutter / 3 $gutter * 1.5
       li.toctree-l3 > a
         display: block
-        background: darken($menu-vertical-background-color, 20%)
-        padding: $gutter / 4 $gutter * 2.5
+        //background: darken($menu-vertical-background-color, 20%)
+        padding: $gutter / 3 $gutter * 2.5
     a:hover span.toctree-expand
       color: $menu-link-medium
     span.toctree-expand
@@ -117,12 +117,12 @@
     font-size: .9em
     &.current
       > a
-        background: darken($menu-vertical-background-color, 25%)
-        padding: $gutter / 4 $gutter * 2.5
+        //background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 3 $gutter * 2.5
       li.toctree-l4 > a
         display: block
-        background: darken($menu-vertical-background-color, 25%)
-        padding: $gutter / 4 $gutter * 3.5
+        //background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 3 $gutter * 3.5
         border-top: none
         border-bottom: none
     a:hover span.toctree-expand
@@ -133,12 +133,12 @@
     font-size: .9em
     &.current
       > a
-        background: darken($menu-vertical-background-color, 25%)
-        padding: $gutter / 4 $gutter * 3.5
+        //background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 3 $gutter * 3.5
       li.toctree-l5 > a
         display: block
-        background: darken($menu-vertical-background-color, 25%)
-        padding: $gutter / 4 $gutter * 4.5
+        //background: darken($menu-vertical-background-color, 25%)
+        padding: $gutter / 3 $gutter * 4.5
         border-top: none
         border-bottom: none
     a:hover span.toctree-expand
@@ -160,15 +160,17 @@
   li ul li a
     margin-bottom: 0
     color: $menu-link-light
-    font-weight: normal
+    font-weight: 400
   a
     display: inline-block
     line-height: 18px
-    padding: $gutter / 4 $gutter
+    padding: $gutter / 3 $gutter
     display: block
     position: relative
-    font-size: 90%
-    color: $menu-link-light
+    font-size: 115%
+    color: white
+    font-family: $custom-font-family
+    font-weight: 500
     &:hover
       background-color: lighten($menu-background-color, 10%)
       cursor: pointer
@@ -192,7 +194,7 @@
   padding: $gutter / 2
   display: block
   color: $nav-search-color
-  margin-bottom: $gutter / 4
+  margin-bottom: 15px
   input[type=text]
     width: 210px
     height: 25px
@@ -240,7 +242,7 @@
   header
     color: $link-color
   a
-    color: $text-light
+    color: white
     &:hover
       background-color: $link-color
       color: $white
@@ -266,11 +268,17 @@
 
 .oc-logo-text
   width: 100%
-  margin-bottom: 5px !important
-  border-bottom: 1px solid rgb(105, 105, 107)
 
 .oc-logo-text svg
-  height: 25px
+  height: 22px
+  width: 260px
+
+.oc-developed-by
+  color: white
+  margin-left: 30px
+  margin-bottom: 0px
+  margin-top: 30px
+  font-family: $custom-font-family
 
 .oc-heading 
 
@@ -283,6 +291,7 @@
 .oc-logo 
   width: 100%
   margin-bottom: 7px !important
+  position: relative
 
 .oc-logo h2
   margin-left: 15px
@@ -295,14 +304,46 @@
   position: relative
   bottom: 5px
 
+.oc-logo span
+  position: absolute
+  font-family: $custom-font-family
+  top: 50px
+  left: 25px
+  color: #B6C505
+
+.oc-searchbox-wrapper
+  margin-left: 27px
+  margin-top: 20px
+  margin-right: 30px
+  position: relative
+
 .oc-search-icon
   fill: white
   float: left
-  margin-right: 18px
-  margin-left: 8px
-  width: 20px
-  height: 20px
-  margin-top: 3px
+  width: 17px
+  height: 17px
+  position: absolute
+  top: 9px
+  left: 245px
+
+.wy-menu-vertical li span.toctree-expand
+  position: relative
+  top: -2px
+
+#rtd-search-form input
+  font-family: $custom-font-family
+  box-sizing: border-box
+  -moz-appearance: none
+  z-index: 10
+  border-radius: 0px
+  color: rgb(183, 183, 183)
+  padding: 0.57143em 0.78571em
+  background: transparent none repeat scroll 0px 0px
+  position: relative
+  border: 1px solid rgb(105, 105, 107)
+  box-shadow: unset
+  width: 100%
+  font-size: 90%
 
 .oc-fixed-header
   width: 100%
@@ -407,7 +448,7 @@
   
 
 .wy-nav-content-wrap
-  margin-left: $nav-desktop-width
+  margin-left: $nav-desktop-width + 15 
   background: $section-background-color
   min-height: 100%
 
@@ -491,7 +532,7 @@ footer
 
 +media($desktop-wider)
   .wy-nav-content-wrap
-    background: rgba(0,0,0,.05) 
+    background: white
   .wy-nav-content
     margin: 0
     background: $section-background-color

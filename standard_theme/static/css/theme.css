@@ -2631,7 +2631,7 @@ a .fa, a .wy-menu-vertical li span.toctree-expand, .wy-menu-vertical li a span.t
 }
 .wy-tray-container li {
   display: block;
-  width: 300px;
+  width: 325px;
   background: transparent;
   color: #fff;
   text-align: center;
@@ -2928,7 +2928,7 @@ button[disabled] {
 }
 
 .wy-dropdown.wy-dropdown-bubble .wy-dropdown-menu {
-  background: #FAFAFA;
+  background: white;
   margin-top: 2px;
 }
 .wy-dropdown.wy-dropdown-bubble .wy-dropdown-menu a {
@@ -4228,7 +4228,7 @@ div[class^='highlight'] pre {
 }
 
 .wy-menu-vertical {
-  width: 300px;
+  width: 325px;
 }
 .wy-menu-vertical header, .wy-menu-vertical p.caption {
   height: 32px;
@@ -4253,15 +4253,14 @@ div[class^='highlight'] pre {
   border-bottom: solid 1px #404040;
 }
 .wy-menu-vertical li.current {
-  background: #e1e1e1;
+  background: white;
 }
 .wy-menu-vertical li.current a {
-  color: gray;
-  border-right: solid 1px #c7c7c7;
-  padding: 0.4045em 2.427em;
+  color: black;
+  padding: 0.53933em 2.427em;
 }
 .wy-menu-vertical li.current a:hover {
-  background: #d4d4d4;
+  background: #d9d9d9;
 }
 .wy-menu-vertical li code, .wy-menu-vertical li .rst-content tt, .rst-content .wy-menu-vertical li tt {
   border: none;
@@ -4280,17 +4279,15 @@ div[class^='highlight'] pre {
 }
 .wy-menu-vertical li.on a, .wy-menu-vertical li.current > a {
   color: #404040;
-  padding: 0.4045em 1.618em;
+  padding: 0.53933em 1.618em;
   font-weight: bold;
   position: relative;
-  background: #FAFAFA;
+  background: white;
   border: none;
-  border-bottom: solid 1px #c7c7c7;
-  border-top: solid 1px #c7c7c7;
   padding-left: 1.618em -4px;
 }
 .wy-menu-vertical li.on a:hover, .wy-menu-vertical li.current > a:hover {
-  background: #FAFAFA;
+  background: white;
 }
 .wy-menu-vertical li.on a:hover span.toctree-expand, .wy-menu-vertical li.current > a:hover span.toctree-expand {
   color: gray;
@@ -4308,31 +4305,27 @@ div[class^='highlight'] pre {
   display: block;
 }
 .wy-menu-vertical li.toctree-l2.current > a {
-  background: #c7c7c7;
-  padding: 0.4045em 2.427em;
+  padding: 0.53933em 2.427em;
 }
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
   display: block;
-  background: #c7c7c7;
-  padding: 0.4045em 4.045em;
+  padding: 0.53933em 4.045em;
 }
 .wy-menu-vertical li.toctree-l2 a:hover span.toctree-expand {
   color: gray;
 }
 .wy-menu-vertical li.toctree-l2 span.toctree-expand {
-  color: #a1a1a1;
+  color: #a6a6a6;
 }
 .wy-menu-vertical li.toctree-l3 {
   font-size: 0.9em;
 }
 .wy-menu-vertical li.toctree-l3.current > a {
-  background: #bababa;
-  padding: 0.4045em 4.045em;
+  padding: 0.53933em 4.045em;
 }
 .wy-menu-vertical li.toctree-l3.current li.toctree-l4 > a {
   display: block;
-  background: #bababa;
-  padding: 0.4045em 5.663em;
+  padding: 0.53933em 5.663em;
   border-top: none;
   border-bottom: none;
 }
@@ -4340,19 +4333,17 @@ div[class^='highlight'] pre {
   color: gray;
 }
 .wy-menu-vertical li.toctree-l3 span.toctree-expand {
-  color: #949494;
+  color: #999999;
 }
 .wy-menu-vertical li.toctree-l4 {
   font-size: 0.9em;
 }
 .wy-menu-vertical li.toctree-l4.current > a {
-  background: #bababa;
-  padding: 0.4045em 5.663em;
+  padding: 0.53933em 5.663em;
 }
 .wy-menu-vertical li.toctree-l4.current li.toctree-l5 > a {
   display: block;
-  background: #bababa;
-  padding: 0.4045em 7.281em;
+  padding: 0.53933em 7.281em;
   border-top: none;
   border-bottom: none;
 }
@@ -4360,7 +4351,7 @@ div[class^='highlight'] pre {
   color: gray;
 }
 .wy-menu-vertical li.toctree-l4 span.toctree-expand {
-  color: #949494;
+  color: #999999;
 }
 .wy-menu-vertical li.toctree-l5 {
   font-size: 0.9em;
@@ -4378,16 +4369,18 @@ div[class^='highlight'] pre {
 .wy-menu-vertical li ul li a {
   margin-bottom: 0;
   color: #b3b3b3;
-  font-weight: normal;
+  font-weight: 400;
 }
 .wy-menu-vertical a {
   display: inline-block;
   line-height: 18px;
-  padding: 0.4045em 1.618em;
+  padding: 0.53933em 1.618em;
   display: block;
   position: relative;
-  font-size: 90%;
-  color: #b3b3b3;
+  font-size: 115%;
+  color: white;
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
 }
 .wy-menu-vertical a:hover {
   background-color: #4e4a4a;
@@ -4407,7 +4400,7 @@ div[class^='highlight'] pre {
 
 .wy-side-nav-search {
   display: block;
-  width: 300px;
+  width: 325px;
   padding: 0.809em;
   margin-bottom: 0.809em;
   z-index: 200;
@@ -4415,8 +4408,8 @@ div[class^='highlight'] pre {
   text-align: left;
   padding: 0.809em;
   display: block;
-  color: #FAFAFA;
-  margin-bottom: 0.4045em;
+  color: white;
+  margin-bottom: 15px;
 }
 .wy-side-nav-search input[type=text] {
   width: 210px;
@@ -4436,7 +4429,7 @@ div[class^='highlight'] pre {
   border-radius: 100%;
 }
 .wy-side-nav-search > a, .wy-side-nav-search .wy-dropdown > a {
-  color: #FAFAFA;
+  color: white;
   font-size: 100%;
   font-weight: bold;
   display: inline-block;
@@ -4469,7 +4462,7 @@ div[class^='highlight'] pre {
   color: #9BAF00;
 }
 .wy-nav .wy-menu-vertical a {
-  color: #b3b3b3;
+  color: white;
 }
 .wy-nav .wy-menu-vertical a:hover {
   background-color: #9BAF00;
@@ -4503,12 +4496,19 @@ div[class^='highlight'] pre {
 
 .oc-logo-text {
   width: 100%;
-  margin-bottom: 5px !important;
-  border-bottom: 1px solid #69696b;
 }
 
 .oc-logo-text svg {
-  height: 25px;
+  height: 22px;
+  width: 260px;
+}
+
+.oc-developed-by {
+  color: white;
+  margin-left: 30px;
+  margin-bottom: 0px;
+  margin-top: 30px;
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .oc-logo svg {
@@ -4521,6 +4521,7 @@ div[class^='highlight'] pre {
 .oc-logo {
   width: 100%;
   margin-bottom: 7px !important;
+  position: relative;
 }
 
 .oc-logo h2, .oc-logo .rst-content .toctree-wrapper p.caption, .rst-content .toctree-wrapper .oc-logo p.caption {
@@ -4536,14 +4537,50 @@ div[class^='highlight'] pre {
   bottom: 5px;
 }
 
+.oc-logo span {
+  position: absolute;
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50px;
+  left: 25px;
+  color: #B6C505;
+}
+
+.oc-searchbox-wrapper {
+  margin-left: 27px;
+  margin-top: 20px;
+  margin-right: 30px;
+  position: relative;
+}
+
 .oc-search-icon {
   fill: white;
   float: left;
-  margin-right: 18px;
-  margin-left: 8px;
-  width: 20px;
-  height: 20px;
-  margin-top: 3px;
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  top: 9px;
+  left: 245px;
+}
+
+.wy-menu-vertical li span.toctree-expand {
+  position: relative;
+  top: -2px;
+}
+
+#rtd-search-form input {
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  -moz-appearance: none;
+  z-index: 10;
+  border-radius: 0px;
+  color: #b7b7b7;
+  padding: 0.57143em 0.78571em;
+  background: transparent none repeat scroll 0px 0px;
+  position: relative;
+  border: 1px solid #69696b;
+  box-shadow: unset;
+  width: 100%;
+  font-size: 90%;
 }
 
 .oc-fixed-header {
@@ -4613,7 +4650,7 @@ div[class^='highlight'] pre {
   bottom: 0;
   left: 0;
   padding-bottom: 2em;
-  width: 300px;
+  width: 325px;
   overflow-x: hidden;
   overflow-y: hidden;
   min-height: 100%;
@@ -4622,7 +4659,7 @@ div[class^='highlight'] pre {
 }
 
 .wy-side-scroll {
-  width: 320px;
+  width: 345px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -4672,8 +4709,8 @@ div[class^='highlight'] pre {
 }
 
 .wy-nav-content-wrap {
-  margin-left: 300px;
-  background: #FAFAFA;
+  margin-left: 340px;
+  background: white;
   min-height: 100%;
 }
 
@@ -4743,7 +4780,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 
 @media screen and (max-width: 768px) {
   .wy-body-for-nav {
-    background: #FAFAFA;
+    background: white;
   }
 
   .wy-nav-top {
@@ -4751,7 +4788,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   }
 
   .wy-nav-side {
-    left: -300px;
+    left: -325px;
   }
   .wy-nav-side.shift {
     width: 85%;
@@ -4787,12 +4824,12 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 }
 @media screen and (min-width: 1400px) {
   .wy-nav-content-wrap {
-    background: rgba(0, 0, 0, 0.05);
+    background: white;
   }
 
   .wy-nav-content {
     margin: 0;
-    background: #FAFAFA;
+    background: white;
   }
 }
 @media print {
@@ -4812,8 +4849,8 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 300px;
-  color: #FAFAFA;
+  width: 325px;
+  color: white;
   background: #1f1d1d;
   border-top: solid 10px #343131;
   font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
@@ -4844,7 +4881,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   clear: both;
 }
 .rst-versions .rst-current-version .fa, .rst-versions .rst-current-version .wy-menu-vertical li span.toctree-expand, .wy-menu-vertical li .rst-versions .rst-current-version span.toctree-expand, .rst-versions .rst-current-version .rst-content .admonition-title, .rst-content .rst-versions .rst-current-version .admonition-title, .rst-versions .rst-current-version .rst-content h1 .headerlink, .rst-content h1 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content h2 .headerlink, .rst-content h2 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content h3 .headerlink, .rst-content h3 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content h4 .headerlink, .rst-content h4 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content h5 .headerlink, .rst-content h5 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content h6 .headerlink, .rst-content h6 .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content dl dt .headerlink, .rst-content dl dt .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content p.caption .headerlink, .rst-content p.caption .rst-versions .rst-current-version .headerlink, .rst-versions .rst-current-version .rst-content tt.download span:first-child, .rst-content tt.download .rst-versions .rst-current-version span:first-child, .rst-versions .rst-current-version .rst-content code.download span:first-child, .rst-content code.download .rst-versions .rst-current-version span:first-child, .rst-versions .rst-current-version .icon {
-  color: #FAFAFA;
+  color: white;
 }
 .rst-versions .rst-current-version .fa-book, .rst-versions .rst-current-version .icon-book {
   float: left;
@@ -4884,7 +4921,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 .rst-versions .rst-other-versions dd a {
   display: inline-block;
   padding: 6px;
-  color: #FAFAFA;
+  color: white;
 }
 .rst-versions.rst-badge {
   width: auto;
@@ -4892,7 +4929,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   right: 20px;
   left: auto;
   border: none;
-  max-width: 300px;
+  max-width: 325px;
 }
 .rst-versions.rst-badge .icon-book {
   float: none;

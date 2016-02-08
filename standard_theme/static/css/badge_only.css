@@ -102,8 +102,8 @@ ul.fas li .fa-large:before {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 300px;
-  color: #FAFAFA;
+  width: 325px;
+  color: white;
   background: #1f1d1d;
   border-top: solid 10px #343131;
   font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
@@ -134,7 +134,7 @@ ul.fas li .fa-large:before {
   clear: both;
 }
 .rst-versions .rst-current-version .fa {
-  color: #FAFAFA;
+  color: white;
 }
 .rst-versions .rst-current-version .fa-book {
   float: left;
@@ -174,7 +174,7 @@ ul.fas li .fa-large:before {
 .rst-versions .rst-other-versions dd a {
   display: inline-block;
   padding: 6px;
-  color: #FAFAFA;
+  color: white;
 }
 .rst-versions.rst-badge {
   width: auto;
@@ -182,7 +182,7 @@ ul.fas li .fa-large:before {
   right: 20px;
   left: auto;
   border: none;
-  max-width: 300px;
+  max-width: 325px;
 }
 .rst-versions.rst-badge .icon-book {
   float: none;

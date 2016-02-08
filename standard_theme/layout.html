@@ -120,22 +120,17 @@
             {% endif %}
           {% endif %}
           --!>
-          <a class="oc-logo-text" href="http://open-contracting.org">
-            <svg>
-              <use xlink:href="#ocp-logo-text" />
-            </svg>
-          </a>
           <a class="oc-logo" href="{{ pathto(master_doc) }}">
             <svg>
               <use xlink:href="#ocp-logo-only" />
             </svg>
             <div class="oc-heading">
-              <h2> Data Standard </h2>
-              <h2> <small>Version 1.0</small> </h2>
+              <h2> {% trans %} Open Contracting {% endtrans %}</h2>
+              <h2> {% trans %} Data Standard {% endtrans %}</h2>
             </div>
+            <span>v1.0</span>
           </a>
 
-          {% include "searchbox.html" %}
 
           {% endblock %}
         </div>
@@ -153,6 +148,13 @@
                <li class="toctree-l1"><a class="reference internal" href="/validator/">Validator</a></li>
             </ul>
           {% endblock %}
+          {% include "searchbox.html" %}
+          <p class="oc-developed-by">{% trans %} Developed By {% endtrans %}</p>
+          <a class="oc-logo-text" href="http://open-contracting.org">
+            <svg>
+              <use xlink:href="#ocp-logo" />
+            </svg>
+          </a>
         </div>
       </div>
     </nav>
@@ -162,7 +164,7 @@
       {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">Data Standard <small>Version 1.0</small></a>
+        <a href="{{ pathto(master_doc) }}">{% trans %} Open Contracting {% endtrans %} {% trans %} Data Standard {% endtrans %} <small>v1.0</small></a>
       </nav>
 
 
