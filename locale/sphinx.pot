@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: standard_theme 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-02-25 15:02+0000\n"
+"POT-Creation-Date: 2016-02-25 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,49 +20,6 @@ msgstr ""
 
 #: standard_theme/breadcrumbs.html:23 standard_theme/breadcrumbs.html:25
 msgid "View page source"
-msgstr ""
-
-#: standard_theme/footer.html:19 standard_theme/layout_old.html:189
-#, python-format
-msgid "&copy; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
-msgstr ""
-
-#: standard_theme/footer.html:21 standard_theme/layout_old.html:191
-#, python-format
-msgid "&copy; Copyright %(copyright)s."
-msgstr ""
-
-#: standard_theme/footer.html:26
-#, python-format
-msgid ""
-"\n"
-"        <span class=\"build\">\n"
-"          Build\n"
-"          <a href=\"%(build_url)s\">%(build_id)s</a>.\n"
-"        </span>\n"
-"      "
-msgstr ""
-
-#: standard_theme/footer.html:33
-#, python-format
-msgid ""
-"\n"
-"        <span class=\"commit\">\n"
-"          Revision <code>%(commit)s</code>.\n"
-"        </span>\n"
-"      "
-msgstr ""
-
-#: standard_theme/footer.html:39 standard_theme/layout_old.html:195
-#, python-format
-msgid "Last updated on %(last_updated)s."
-msgstr ""
-
-#: standard_theme/footer.html:46
-msgid ""
-"Built with <a href=\"http://sphinx-doc.org/\">Sphinx</a> using a <a "
-"href=\"https://github.com/snide/sphinx_rtd_theme\">theme</a> provided by "
-"<a href=\"https://readthedocs.org\">Read the Docs</a>"
 msgstr ""
 
 #: standard_theme/layout.html:35 standard_theme/layout_old.html:122
@@ -105,6 +62,21 @@ msgstr ""
 
 #: standard_theme/layout_old.html:29
 msgid "Navigation"
+msgstr ""
+
+#: standard_theme/layout_old.html:189
+#, python-format
+msgid "&copy; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
+msgstr ""
+
+#: standard_theme/layout_old.html:191
+#, python-format
+msgid "&copy; Copyright %(copyright)s."
+msgstr ""
+
+#: standard_theme/layout_old.html:195
+#, python-format
+msgid "Last updated on %(last_updated)s."
 msgstr ""
 
 #: standard_theme/layout_old.html:198
