@@ -1,23 +1,23 @@
-# Spanish translations for standard_theme.
+# Translations template for standard_theme.
 # Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the standard_theme
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-01-26 16:47+0000\n"
-"PO-Revision-Date: 2016-01-25 18:10+0000\n"
-"Last-Translator: \n"
-"Language: es\n"
-"Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2016-02-25 10:24+0000\n"
+"PO-Revision-Date: 2016-02-25 11:02+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish (http://www.transifex.com/OpenDataServices/open-contracting-standard-theme/language/es/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: standard_theme/breadcrumbs.html:23 standard_theme/breadcrumbs.html:25
 msgid "View page source"
@@ -62,30 +62,46 @@ msgstr ""
 #: standard_theme/footer.html:46
 msgid ""
 "Built with <a href=\"http://sphinx-doc.org/\">Sphinx</a> using a <a "
-"href=\"https://github.com/snide/sphinx_rtd_theme\">theme</a> provided by "
-"<a href=\"https://readthedocs.org\">Read the Docs</a>"
+"href=\"https://github.com/snide/sphinx_rtd_theme\">theme</a> provided by <a "
+"href=\"https://readthedocs.org\">Read the Docs</a>"
 msgstr ""
 
-#: standard_theme/layout.html:31 standard_theme/layout_old.html:122
+#: standard_theme/layout.html:35 standard_theme/layout_old.html:122
 #, python-format
 msgid "Search within %(docstitle)s"
 msgstr ""
 
-#: standard_theme/layout.html:51 standard_theme/layout_old.html:131
+#: standard_theme/layout.html:55 standard_theme/layout_old.html:131
 msgid "About these documents"
 msgstr ""
 
-#: standard_theme/layout.html:55 standard_theme/layout_old.html:134
+#: standard_theme/layout.html:59 standard_theme/layout_old.html:134
 msgid "Index"
 msgstr ""
 
-#: standard_theme/layout.html:59 standard_theme/layout_old.html:137
+#: standard_theme/layout.html:63 standard_theme/layout_old.html:137
 #: standard_theme/search.html:11
 msgid "Search"
 msgstr ""
 
-#: standard_theme/layout.html:62 standard_theme/layout_old.html:140
+#: standard_theme/layout.html:66 standard_theme/layout_old.html:140
 msgid "Copyright"
+msgstr ""
+
+#: standard_theme/layout.html:102 standard_theme/layout.html:113
+msgid "Go"
+msgstr ""
+
+#: standard_theme/layout.html:149 standard_theme/layout.html:188
+msgid " Open Contracting "
+msgstr ""
+
+#: standard_theme/layout.html:150 standard_theme/layout.html:188
+msgid " Data Standard "
+msgstr ""
+
+#: standard_theme/layout.html:173
+msgid " Developed By "
 msgstr ""
 
 #: standard_theme/layout_old.html:29
@@ -111,7 +127,6 @@ msgstr ""
 
 #: standard_theme/search.html:35
 msgid ""
-"Your search did not match any documents. Please make sure that all words "
-"are spelled correctly and that you've selected enough categories."
+"Your search did not match any documents. Please make sure that all words are"
+" spelled correctly and that you've selected enough categories."
 msgstr ""
-

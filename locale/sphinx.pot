@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: standard_theme 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-01-26 16:47+0000\n"
+"POT-Creation-Date: 2016-02-25 10:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,26 +65,42 @@ msgid ""
 "<a href=\"https://readthedocs.org\">Read the Docs</a>"
 msgstr ""
 
-#: standard_theme/layout.html:31 standard_theme/layout_old.html:122
+#: standard_theme/layout.html:35 standard_theme/layout_old.html:122
 #, python-format
 msgid "Search within %(docstitle)s"
 msgstr ""
 
-#: standard_theme/layout.html:51 standard_theme/layout_old.html:131
+#: standard_theme/layout.html:55 standard_theme/layout_old.html:131
 msgid "About these documents"
 msgstr ""
 
-#: standard_theme/layout.html:55 standard_theme/layout_old.html:134
+#: standard_theme/layout.html:59 standard_theme/layout_old.html:134
 msgid "Index"
 msgstr ""
 
-#: standard_theme/layout.html:59 standard_theme/layout_old.html:137
+#: standard_theme/layout.html:63 standard_theme/layout_old.html:137
 #: standard_theme/search.html:11
 msgid "Search"
 msgstr ""
 
-#: standard_theme/layout.html:62 standard_theme/layout_old.html:140
+#: standard_theme/layout.html:66 standard_theme/layout_old.html:140
 msgid "Copyright"
+msgstr ""
+
+#: standard_theme/layout.html:102 standard_theme/layout.html:113
+msgid "Go"
+msgstr ""
+
+#: standard_theme/layout.html:149 standard_theme/layout.html:188
+msgid " Open Contracting "
+msgstr ""
+
+#: standard_theme/layout.html:150 standard_theme/layout.html:188
+msgid " Data Standard "
+msgstr ""
+
+#: standard_theme/layout.html:173
+msgid " Developed By "
 msgstr ""
 
 #: standard_theme/layout_old.html:29

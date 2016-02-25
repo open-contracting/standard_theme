@@ -55,6 +55,10 @@ The theme uses babel's setup.py integration for translations:
 ```
 # create the pot file
 python setup.py extract_messages
-# update the po files
-python setup.py update_catalog
+
+# push to transifex
+tx push -s
+
+# get from transifex
+tx pull 
 ```
