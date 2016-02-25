@@ -94,6 +94,27 @@
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="oc-switchers">
+        <form method="get">
+          <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
+          </select>  
+          <noscript>
+             <input class="oc-custom-submit" type="submit" value="{% trans %}Go{% endtrans %}" />
+          </noscript>
+        </form>
+        <!--
+        <form method="get">
+          <select class="oc-custom-select" name="lang" onchange="this.form.submit()">
+            <option value="moo">Lang1</option>
+            <option value="moo">Lang1 1</option>
+            <option value="moo">Lang1 1</option>
+          </select>  
+          <noscript>
+             <input class="oc-custom-submit" type="submit" value="{% trans %}Go{% endtrans %}" />
+          </noscript>
+        </form>
+        -->
+      </div>
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           {% block sidebartitle %}

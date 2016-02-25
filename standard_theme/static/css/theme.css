@@ -4529,6 +4529,7 @@ div[class^='highlight'] pre {
   margin-bottom: 0px;
   display: inline-block;
   color: white;
+  font-size: 22px;
 }
 
 .oc-logo h2 small, .oc-logo .rst-content .toctree-wrapper p.caption small, .rst-content .toctree-wrapper .oc-logo p.caption small {
@@ -4562,6 +4563,54 @@ div[class^='highlight'] pre {
   left: 245px;
 }
 
+.oc-link-list {
+  width: 140px;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  overflow: auto;
+  border: 1px solid;
+  padding-left: 10px;
+  font-size: 14px;
+  height: 50px;
+}
+
+.oc-link-list a {
+  display: block;
+}
+
+.oc-custom-select {
+  font-weight: 500;
+  font-style: normal;
+  font-family: "stratum-1-web", "Helvetica Neue", Helvetica, Arial, sans-seri;
+  color: #B7B7B7;
+  border: 1px solid #69696B;
+  width: 100px;
+  cursor: pointer;
+  background: 0 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  line-height: 1.2;
+  position: relative;
+  box-shadow: unset;
+  margin-left: 25px;
+}
+
+.oc-custom-submit {
+  border: 1px solid #69696B;
+  color: #B7B7B7;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  margin-left: -4px;
+  background: 0;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+}
+
 .wy-menu-vertical li span.toctree-expand {
   position: relative;
   top: -2px;
@@ -4579,7 +4628,7 @@ div[class^='highlight'] pre {
   position: relative;
   border: 1px solid #69696b;
   box-shadow: unset;
-  width: 100%;
+  width: 270px;
   font-size: 90%;
 }
 
@@ -4656,6 +4705,22 @@ div[class^='highlight'] pre {
   min-height: 100%;
   background: #373738;
   z-index: 200;
+}
+
+.oc-switchers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #373738;
+  z-index: 500;
+}
+
+.oc-switchers form {
+  display: block;
+  width: 160px;
+  float: left;
 }
 
 .wy-side-scroll {
