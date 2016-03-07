@@ -95,7 +95,7 @@
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="oc-switchers">
-        <form method="get">
+        <form method="get" action="/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
               <!--#include virtual="/includes/version-options.html" -->
           </select>  
@@ -105,7 +105,7 @@
         </form>
         <!--
         <form method="get">
-          <select class="oc-custom-select" name="lang" onchange="this.form.submit()">
+          <select class="oc-custom-select" name="lang" onchange="this.form.submit()" action="/switcher">
             <option value="moo">Lang1</option>
             <option value="moo">Lang1 1</option>
             <option value="moo">Lang1 1</option>
