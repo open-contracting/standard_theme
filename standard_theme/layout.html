@@ -86,14 +86,18 @@
 <body class="wy-body-for-nav" role="document">
 
   {% include "svg.html" %}
-  
-
 
   {% block extrabody %} {% endblock %}
   <div class="wy-grid-for-nav">
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+
+      <!--#include virtual="$BANNER" -->
+      <!-- <div class="oc-fixed-alert-header">
+        This is a development copy of the OCDS docs, for the latest <a href="foo"> live version is 1.0. </a>
+      </div> -->
+
       <div class="oc-switchers">
         <form method="get" action="/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">

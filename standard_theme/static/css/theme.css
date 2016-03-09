@@ -4494,6 +4494,22 @@ div[class^='highlight'] pre {
   opacity: 0;
 }
 
+.oc-fixed-alert-header {
+  background: #f26258;
+  color: #fff;
+  font-weight: 700;
+  display: block;
+  padding: 8px 20px;
+  z-index: 1000;
+  width: 100%;
+  left: 325px;
+  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+}
+.oc-fixed-alert-header a {
+  color: #d9e021;
+}
+
 .oc-logo-text {
   width: 100%;
 }
