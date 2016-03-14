@@ -1,6 +1,8 @@
 # Open Contracting Standard Sphinx Theme
 
-This is the Sphinx theme used for the Open Contracting Standard documentation. It is a fork of the Read the Docs Sphinx Theme, the original readme for that can be found at [RTD_THEME_README.rst](RTD_THEME_README.rst).
+This is the Sphinx theme used for the [Open Contracting Standard documentation](https://github.com/open-contracting/standard). It is a fork of the Read the Docs Sphinx Theme, the original readme for that can be found at [RTD_THEME_README.rst](RTD_THEME_README.rst).
+
+We forked the theme rather than inherit from it because Sphinx's jinja templates only allow one level of overrides. By having our own (forked) theme, we can have one theme for all versions of the standard, but make version specific overrides on the apprpriate branch.
 
 ## Set up your environment
 
