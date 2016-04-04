@@ -5,13 +5,14 @@
 # 
 # Translators:
 # Guillem Borrell <guillem@torroja.dmt.upm.es>, 2011
+# Oscar Montiel <miguel.montiel@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2016-03-14 11:58+0000\n"
-"PO-Revision-Date: 2016-03-14 11:58+0000\n"
-"Last-Translator: Ben Webb <ben.webb@opendataservices.coop>\n"
+"PO-Revision-Date: 2016-04-03 00:06+0000\n"
+"Last-Translator: Oscar Montiel <miguel.montiel@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/OpenDataServices/open-contracting-standard-theme/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,19 +23,19 @@ msgstr ""
 
 #: standard_theme/breadcrumbs.html:11
 msgid "Docs"
-msgstr ""
+msgstr "Documentos"
 
 #: standard_theme/breadcrumbs.html:23 standard_theme/breadcrumbs.html:25
 msgid "View page source"
-msgstr ""
+msgstr "Ver fuente del sitio"
 
 #: standard_theme/footer.html:5
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: standard_theme/footer.html:8
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: standard_theme/layout.html:35 standard_theme/layout_old.html:122
 #, python-format
@@ -64,19 +65,19 @@ msgstr "Ir a"
 
 #: standard_theme/layout.html:154 standard_theme/layout.html:193
 msgid " Open Contracting "
-msgstr ""
+msgstr "Contrataciones Abiertas"
 
 #: standard_theme/layout.html:155 standard_theme/layout.html:193
 msgid " Data Standard "
-msgstr ""
+msgstr "Estándar de Datos"
 
 #: standard_theme/layout.html:174
 msgid "Validator"
-msgstr ""
+msgstr "Validador"
 
 #: standard_theme/layout.html:178
 msgid " Developed By "
-msgstr ""
+msgstr "Desarrollado Por"
 
 #: standard_theme/layout_old.html:29
 msgid "Navigation"
@@ -108,7 +109,7 @@ msgstr "Creado con <a href=\"http://sphinx-doc.org/\">Sphinx</a> %(sphinx_versio
 msgid ""
 "Please activate JavaScript to enable the search\n"
 "      functionality."
-msgstr ""
+msgstr "Por facor activa JavaScript para mermitir la funcionalidad\nde búsqueda."
 
 #: standard_theme/search.html:33
 msgid "Search Results"
