@@ -4527,6 +4527,11 @@ div[class^='highlight'] pre {
   font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.oc-heading {
+  float: left;
+  width: 207px;
+}
+
 .oc-logo svg {
   height: 50px;
   width: 80px;
