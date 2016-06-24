@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: standard_theme 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-14 11:58+0000\n"
+"POT-Creation-Date: 2016-06-24 10:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,15 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: standard_theme/footer.html:16
+msgid ""
+"Copyright (c) 2014-2016 Open Contracting Partnership, and released under "
+"the <a href=\"https://github.com/open-"
+"contracting/standard/blob/1.0-dev/LICENSE\">Apache License Version "
+"2.0</a>, <a href=\"https://github.com/open-contracting/standard\">source "
+"available on GitHub</a>"
+msgstr ""
+
 #: standard_theme/layout.html:35 standard_theme/layout_old.html:122
 #, python-format
 msgid "Search within %(docstitle)s"
@@ -56,23 +65,23 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: standard_theme/layout.html:107 standard_theme/layout.html:118
+#: standard_theme/layout.html:107 standard_theme/layout.html:115
 msgid "Go"
 msgstr ""
 
-#: standard_theme/layout.html:154 standard_theme/layout.html:193
+#: standard_theme/layout.html:150 standard_theme/layout.html:189
 msgid " Open Contracting "
 msgstr ""
 
-#: standard_theme/layout.html:155 standard_theme/layout.html:193
+#: standard_theme/layout.html:151 standard_theme/layout.html:189
 msgid " Data Standard "
 msgstr ""
 
-#: standard_theme/layout.html:174
+#: standard_theme/layout.html:170
 msgid "Validator"
 msgstr ""
 
-#: standard_theme/layout.html:178
+#: standard_theme/layout.html:174
 msgid " Developed By "
 msgstr ""
 
