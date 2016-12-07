@@ -6,13 +6,14 @@
 # Translators:
 # Joel Gombin <joel.gombin@gmail.com>, 2016
 # Louis Charbonneau <louis.charbonneau171@gmail.com>, 2016
+# samgoeta <samgoeta@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-24 10:22+0100\n"
-"PO-Revision-Date: 2016-11-12 06:29+0000\n"
-"Last-Translator: Joel Gombin <joel.gombin@gmail.com>\n"
+"POT-Creation-Date: 2016-12-01 14:37+0000\n"
+"PO-Revision-Date: 2016-12-07 15:56+0000\n"
+"Last-Translator: samgoeta <samgoeta@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/OpenDataServices/open-contracting-standard-theme/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr "Documentation"
 
 #: standard_theme/breadcrumbs.html:23 standard_theme/breadcrumbs.html:25
 msgid "View page source"
-msgstr "Pour voir la page source"
+msgstr "Pour voir la source de la page"
 
 #: standard_theme/footer.html:5
 msgid "Next"
@@ -74,11 +75,11 @@ msgstr "Aller"
 
 #: standard_theme/layout.html:150 standard_theme/layout.html:189
 msgid " Open Contracting "
-msgstr "Passation de marché public"
+msgstr "Standard de données sur"
 
 #: standard_theme/layout.html:151 standard_theme/layout.html:189
 msgid " Data Standard "
-msgstr "Données normalisées"
+msgstr "la commande publique ouverte"
 
 #: standard_theme/layout.html:170
 msgid "Validator"
@@ -118,7 +119,7 @@ msgstr "Créé à l'aide de <a href=\"http://sphinx-doc.org/\">Sphinx</a> %(sphi
 msgid ""
 "Please activate JavaScript to enable the search\n"
 "      functionality."
-msgstr "S'il vous plaît activer JavaScript pour permettre la fonction de recherche."
+msgstr "S'il vous plaît activez JavaScript pour permettre la fonction de recherche."
 
 #: standard_theme/search.html:33
 msgid "Search Results"
