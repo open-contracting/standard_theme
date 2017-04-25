@@ -142,7 +142,7 @@
             {% endif %}
           {% endif %}
           --!>
-          <a class="oc-logo" href="{{ pathto(master_doc) }}">
+          <a title="v{{release}}" class="oc-logo" href="{{ pathto(master_doc) }}">
             <svg>
               <use xlink:href="#ocp-logo-only" />
             </svg>
@@ -150,7 +150,7 @@
               <h2> {% trans %} Open Contracting {% endtrans %}</h2>
               <h2> {% trans %} Data Standard {% endtrans %}</h2>
             </div>
-            <span>v1.0</span>
+            <span>v{{version}}</span>
           </a>
 
 
