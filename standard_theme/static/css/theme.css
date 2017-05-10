@@ -5187,6 +5187,9 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 .rst-content table.docutils.citation tt, .rst-content table.docutils.citation code, .rst-content table.docutils.footnote tt, .rst-content table.docutils.footnote code {
   color: #555;
 }
+.rst-content table.docutils td p {
+  font-size: 100%;
+}
 .rst-content table.field-list {
   border: none;
 }
