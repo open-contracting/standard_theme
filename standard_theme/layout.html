@@ -166,9 +166,11 @@
                 <!-- Local TOC -->
                 <div class="local-toc">{{ toc }}</div>
             {% endif %}
+            {% block extra_links %}
             <ul class="oc-extra-nav">
                <li class="toctree-l1"><a class="reference internal" href="/validator/">{%trans%}Validator{% endtrans %}</a></li>
             </ul>
+            {% endblock %}
           {% endblock %}
           {% include "searchbox.html" %}
           <p class="oc-developed-by">{% trans %} Developed By {% endtrans %}</p>
@@ -185,8 +187,10 @@
 
       {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+       {% block mobile_nav %}
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
         <a href="{{ pathto(master_doc) }}">{% trans %} Open Contracting {% endtrans %} {% trans %} Data Standard {% endtrans %} <small>v1.0</small></a>
+       {% endblock %}
       </nav>
 
 
