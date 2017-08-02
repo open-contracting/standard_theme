@@ -94,9 +94,6 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
 
       <!--#include virtual="$BANNER" -->
-      <!-- <div class="oc-fixed-alert-header">
-        This is a development copy of the OCDS docs, for the latest <a href="foo"> live version is 1.0. </a>
-      </div> -->
 
       <div class="oc-switchers">
         <form method="get" action="/switcher">
@@ -189,7 +186,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
        {% block mobile_nav %}
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">{% trans %} Open Contracting {% endtrans %} {% trans %} Data Standard {% endtrans %} <small>v1.0</small></a>
+        <a href="{{ pathto(master_doc) }}">{% trans %} Open Contracting {% endtrans %} {% trans %} Data Standard {% endtrans %} <small>v{{version}}</small></a>
        {% endblock %}
       </nav>
 
