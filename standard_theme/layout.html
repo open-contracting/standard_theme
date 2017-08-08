@@ -170,12 +170,14 @@
             {% endblock %}
           {% endblock %}
           {% include "searchbox.html" %}
+          {% block developed_by %}
           <p class="oc-developed-by">{% trans %} Developed By {% endtrans %}</p>
           <a class="oc-logo-text" href="http://open-contracting.org">
             <svg>
               <use xlink:href="#ocp-logo" />
             </svg>
           </a>
+          {% endblock %}
         </div>
       </div>
     </nav>
