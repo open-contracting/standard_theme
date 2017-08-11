@@ -98,7 +98,9 @@
       <div class="oc-switchers">
         <form method="get" action="/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
+              {% block version_options %}
               <!--#include virtual="/includes/version-options.html" -->
+              {% endblock %}
           </select>  
           <noscript>
              <input class="oc-custom-submit" type="submit" value="{% trans %}Go{% endtrans %}" />
