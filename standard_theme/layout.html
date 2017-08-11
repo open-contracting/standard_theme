@@ -96,7 +96,7 @@
       <!--#include virtual="$BANNER" -->
 
       <div class="oc-switchers">
-        <form method="get" action="/switcher">
+        <form method="get" action="{% block root %}{% endblock %}/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
               {% block version_options %}
               <!--#include virtual="/includes/version-options.html" -->
