@@ -16,13 +16,13 @@ function escapeString(text) {
 
 function renderResults() {
     var term = $('#rtd-search-form input[name="q"]').val();
-    var index = 'ocds-doc-search-' + DOCUMENTATION_OPTIONS.VERSION + '-' + (DOCUMENTATION_OPTIONS.LANGUAGE || 'en');
+    var base_url = location.href.substring(0, location.href.indexOf('/search/?') + 1)
     $.ajax({
-        url: "http://standard-search.default.opendataservices.uk0.bigv.io/v1/search?q=" + encodeURIComponent(term) + "&index=" + encodeURIComponent(index),
+        url: "http://www.standard-search.default.opendataservices.uk0.bigv.io/v1/search?q=" + encodeURIComponent(term) + "&base_url=" + encodeURIComponent(base_url),
+        //url: "http://localhost:5000/v1/search?q=" + encodeURIComponent(term) + "&base_url=" + encodeURIComponent(base_url),
         success: function(data) {
             $('#search-results').hide();
             $('#search-results').html('<div id="resultsCount"></div> <ul id="resultsList" class="search"></ul>');
-              
 
             var resultString = "Search finished, found %s page(s) matching the search query.";
 
