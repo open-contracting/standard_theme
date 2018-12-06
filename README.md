@@ -1,66 +1,69 @@
 # Open Contracting Standard Sphinx Theme
 
-This is the Sphinx theme used for the [Open Contracting Standard documentation](https://github.com/open-contracting/standard). It is a fork of the Read the Docs Sphinx Theme, the original readme for that can be found at [RTD_THEME_README.rst](RTD_THEME_README.rst).
+This is the Sphinx theme used for the [Open Contracting Standard documentation](https://github.com/open-contracting/standard). It is a fork of the Read the Docs Sphinx Theme, the original readme for that can be found at [RTD_THEME_README.rst](/RTD_THEME_README.rst).
 
-We forked the theme rather than inherit from it because Sphinx's jinja templates only allow one level of overrides. By having our own (forked) theme, we can have one theme for all versions of the standard, but make version specific overrides on the apprpriate branch.
+We forked the theme rather than inheriting from it, because Sphinx's Jinja templates only allow one level of overrides. By having our own (forked) theme, we can have one theme for all versions of the standard, but make version-specific overrides on the apprpriate branch.
 
-## Set up your environment
+## Setting up the environment
 
-The [Set up your environment](https://github.com/open-contracting/standard_theme/blob/open_contracting/RTD_THEME_README.rst#set-up-your-environment) instructions in the original README are for Macs. On a recent version of Ubuntu (e.g. 15.10) you can do:
+The [instructions](/RTD_THEME_README.rst#set-up-your-environment) in the original README are for macOS. On a recent version of Ubuntu (like 15.10), you can run:
 
 ```
-sudo aptitude install nodejs ruby-sass npm
+sudo aptitude install nodejs npm ruby-sass
 npm config set prefix '~/.npm-packages'
 export PATH="$PATH:$HOME/.npm-packages/bin" # and put this line in your ~/.bashrc
 # (if running 'node' doesn't bring up a command prompt (>)
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
-On older versions (e.g. 14.04) ruby-sass is not recent enough, so you will need to install nodejs and npm only, and do a `gem install sass` instead.
+On older versions (like 14.04), run `gem install sass` instead of installing `ruby-sass` with aptitude.
 
-Then, as in the other README:
+Then, as in the original README:
 
 ```
 npm install -g bower grunt-cli
 npm install
-grunt
 ```
 
-NB: grunt - watches for changes and automatically recompiles.
+## Editing the theme
 
-## How to edit the theme files
+Create a working branch:
 
-By default the branch that is checked out is called `open_contracting` - that's the one used on the live site. Don't mess with master (that's upstream).
+1. Checkout the `open_contracting` branch (`master` is upstream)
+1. Checkout a working branch
+1. Run `grunt` to automatically detect changes and recompile CSS files
 
-So we can work on bug and feature branches, and then merge into the open-contracting branch when happy
+Make changes:
 
-So checkout your working branch
+1. Make changes to SASS files
 
-Make changes to e.g. sass files (grunt will detect the changes and automatically recompile the files)
+Preview changes:
 
-To see the changes you have made
+1. Change into the `standard`'s directory
+1. Run `pip install -e path` where `path` is the path to the theme's directory
+1. Run `make` (or `make source` for English only)
+1. Change into the `build` directory
+1. Run `python -m http.server`
+1. Repeat from "Make changes" until done
 
-run `./build_docs.sh` (in the standard docs root - line 44 of the README.md)
-run python server
-see the changes, make more changes, build the docs, see changes etc
+Commit changes:
 
-Once finished with changes:
-* stop grunt (with control-C)
-* run `grunt build` (TODO: Explain why)
-* commit changes to the standard_theme repo
-
+1. Stop `grunt` (Ctrl-C)
+1. Run `grunt build`
+1. Commit changes
 
 ## Translations
 
-The theme uses babel's setup.py integration for translations:
+The theme uses babel's `setup.py` integration for translations:
 
-```
-# create the pot file
-python setup.py extract_messages
+Create the pot file:
 
-# push to transifex
-tx push -s
+    python setup.py extract_messages
 
-# get from transifex
-tx pull 
-```
+Push to Transifex:
+
+    tx push -s
+
+Pull from Transifex:
+
+    tx pull
