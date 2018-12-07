@@ -13,8 +13,7 @@
   <hr/>
 
   <div role="contentinfo">
-      {% trans %}Copyright (c) {{ theme_copyright }}, and released under the <a href="{{ theme_license_url }}">{{ theme_license_name }}</a>, <a href="{{ theme_repository_url }}">source available on GitHub</a>{% endtrans %}.
+      {% trans %}Copyright (c) {{ theme_copyright }}, and released under the <a href="{{ theme_license_url }}">{{ theme_license_name }}</a>, <a href="{{ theme_repository_url }}">source available on GitHub</a>.{% endtrans %}
+      {%- block extrafooter %} {% endblock %}
   </div>
-
-  {%- block extrafooter %} {% endblock %}
 </footer>
