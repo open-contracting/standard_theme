@@ -96,7 +96,7 @@
       <!--#include virtual="$BANNER" -->
 
       <div class="oc-switchers">
-        <form method="get" action="{% block root %}{% endblock %}/switcher">
+        <form method="get" action="{{ theme_root_url }}/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
             {% block version_options %}
             {# If the profile is versioned, use a server include #}
@@ -128,41 +128,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           {% block sidebartitle %}
-
-          {% if logo and theme_logo_only %}
-            <a href="{{ pathto(master_doc) }}">
-          {% endif %}
-
-          {% if logo %}
-            {# Not strictly valid HTML, but it's the only way to display/scale it properly, without weird scripting or heaps of work #}
-            <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" />
-          {% endif %}
-          </a>
-          <!--
-          {% if theme_display_version %}
-            {%- set nav_version = version %}
-            {% if READTHEDOCS and current_version %}
-              {%- set nav_version = current_version %}
-            {% endif %}
-            {% if nav_version %}
-              <div class="version">
-                {{ nav_version }}
-              </div>
-            {% endif %}
-          {% endif %}
-          --!>
-          <a title="v{{release}}" class="oc-logo" href="{{ pathto(master_doc) }}">
-            <svg>
-              <use xlink:href="#ocp-logo-only" />
-            </svg>
-            <div class="oc-heading">
-              <h2> {% trans %} Open Contracting {% endtrans %}</h2>
-              <h2> {% trans %} Data Standard {% endtrans %}</h2>
-            </div>
-            <span>v{{version}}</span>
-          </a>
-
-
+          <a href="{{ pathto(master_doc) }}">{% trans %}{{ project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}</small>{% endif %}</a>
           {% endblock %}
         </div>
 
@@ -196,7 +162,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
        {% block mobile_nav %}
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">{% trans %} Open Contracting {% endtrans %} {% trans %} Data Standard {% endtrans %} <small>v{{version}}</small></a>
+        <a href="{{ pathto(master_doc) }}">{% trans %}{{ theme_short_project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}{% endif %}</small></a>
        {% endblock %}
       </nav>
 
