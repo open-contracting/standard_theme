@@ -18,7 +18,7 @@ function renderResults() {
     var term = $('#rtd-search-form input[name="q"]').val();
     var base_url = location.href.substring(0, location.href.indexOf('/search/?') + 1)
     $.ajax({
-        url: "http://www.standard-search.default.opendataservices.uk0.bigv.io/v1/search?q=" + encodeURIComponent(term) + "&base_url=" + encodeURIComponent(base_url),
+        url: "https://www.standard-search.default.opendataservices.uk0.bigv.io/v1/search?q=" + encodeURIComponent(term) + "&base_url=" + encodeURIComponent(base_url),
         //url: "http://localhost:5000/v1/search?q=" + encodeURIComponent(term) + "&base_url=" + encodeURIComponent(base_url),
         success: function(data) {
             $('#search-results').hide();
