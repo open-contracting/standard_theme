@@ -101,12 +101,7 @@
             {% block version_options %}
             {# If the profile is versioned, use a server include #}
             <option>Version</option>
-            <optgroup label="Live">
-              <option value="latest">latest</option>
-            </optgroup>
-            <optgroup label="Development Branches">
-              <option value="master">master</option>
-            </optgroup>
+            <option value="master">master</option>
             {% endblock %}
           </select>  
           <noscript>
