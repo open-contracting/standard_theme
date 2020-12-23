@@ -1,17 +1,30 @@
 $(document).ready(function () {
-  renderResults();
+  var parameters = {};
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams not fully supported.
+  location.search.substr(1).split('&').forEach(function (pair) {
+    var parts = pair.split('=');
+    parameters[parts[0]] = parts[1];
+  });
+
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent#Decoding_query_parameters_from_a_URL
+  $('#rtd-search-form input[name="q"]').val(decodeURIComponent(parameters.q.replace(/\+/g, ' ')));
+
+  render();
 });
 
-function renderResults() {
+function render() {
   var query = $('#rtd-search-form input[name="q"]').val();
-  var base_url = location.href.substring(0, location.href.indexOf('/search/?') - 2)
+  var baseUrl = location.href.substring(0, location.href.indexOf('/search/?') - 2);
 
   $.ajax({
     url: 'https://standard.open-contracting.org:9200/ocdsindex_en/_search?size=100',
-    username: 'public',
     // The "public" user has read-only access to Elasticsearch indices created by OCDS Index. We set a password
     // only to limit the impact of untargeted scans (e.g. bots).
-    password: 'G*PweUnH4u@r',
+    headers: {
+      Authorization: 'Basic ' + btoa('public:G*PweUnH4u@r') // IE > 9
+    },
+    method: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
       "query": {
@@ -25,7 +38,7 @@ function renderResults() {
           },
           "filter": {
             "term": {
-              "base_url": base_url
+              "base_url": baseUrl
             }
           }
         }
@@ -37,10 +50,10 @@ function renderResults() {
         }
       }
     }),
-    success: function(data) {
+    success: function (data) {
       $('#search-results').hide();
 
-      $('#search-results').html('<div id="resultsCount"></div><ul id="resultsList" class="search"></ul>');
+      $('#search-results').html('<div id="results-count"></div><ul id="results-list" class="search"></ul>');
 
       var message = "Search finished, found %s page(s) matching the search query.";
 
@@ -55,15 +68,15 @@ function renderResults() {
         listHtml += $("<div>").text(data.hits.hits[i].title).html();
         listHtml += '</a>';
         listHtml += '<div class="context">';
-        for (var j = 0, m = data.hits.hits[i].highlights.length; j < k; j++) {
-          listHtml += data.hits.hits[i].highlights[j] + ' ';
-        }
+        data.hits.hits[i].highlights.forEach(function (highlight) {
+          listHtml += highlight + ' ';
+        });
         listHtml += '</div>';
         listHtml += '</li>';
       }
 
-      $('#resultsCount').html(countHtml);
-      $('#resultsList').html(listHtml);
+      $('#results-count').html(countHtml);
+      $('#results-list').html(listHtml);
 
       $('#search-results').show();
     }
