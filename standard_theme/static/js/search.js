@@ -43,6 +43,7 @@ function render() {
           }
         }
       },
+      // https://www.elastic.co/guide/en/elasticsearch/reference/7.10/highlighting.html
       "highlight": {
         "fields": {
           "text": {},
@@ -60,20 +61,21 @@ function render() {
       var countHtml = (Documentation.TRANSLATIONS[message] || message).replace('%s', data.hits.total.value.toString());
 
       var listHtml = '';
-      for (var i = 0, l = data.hits.hits.length; i < l; i++) {
-        var parts = data.hits.hits[i].url.split('#');
+      data.hits.hits.forEach(function (hit) {
+        var parts = hit._source.url.split('#');
+        var highlights = hit.highlight.text || hit.highlight.title;
 
         listHtml += '<li>';
         listHtml += '<a href="' + parts[0] + '?highlight=' + encodeURIComponent(query) + '#' + parts[1] + '">';
-        listHtml += $("<div>").text(data.hits.hits[i].title).html();
+        listHtml += $("<div>").text(hit._source.title).html();
         listHtml += '</a>';
         listHtml += '<div class="context">';
-        data.hits.hits[i].highlights.forEach(function (highlight) {
+        highlights.forEach(function (highlight) {
           listHtml += highlight + ' ';
         });
         listHtml += '</div>';
         listHtml += '</li>';
-      }
+      });
 
       $('#results-count').html(countHtml);
       $('#results-list').html(listHtml);
