@@ -6,7 +6,6 @@
 """
 from setuptools import setup
 
-
 setup(
     name='standard_theme',
     url='https://github.com/open-contracting/standard_theme/',
