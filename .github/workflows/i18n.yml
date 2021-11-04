@@ -2,7 +2,7 @@ name: Translations
 on:
   pull_request: {}
   push:
-    branches: [main]
+    branches: [open_contracting]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,6 +12,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt install translate-toolkit
-      - run: pip install -r requirements.txt
-      - run: python manage.py makemessages -l es
-      - run: '[ $(find . -name LC_MESSAGES -exec pocount --incomplete --short "{}" +) = "" ]'
+      - run: pip install .
+      - run: python setup.py update_catalog
+      - run: '[ "$(find . -name LC_MESSAGES -exec pocount --incomplete --short "{}" +)" = "" ]'
