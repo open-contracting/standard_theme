@@ -12,6 +12,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt install translate-toolkit
-      - run: pip install .
+      - run: pip install babel
       - run: python setup.py update_catalog
       - run: '[ "$(find . -name LC_MESSAGES -exec pocount --incomplete --short "{}" +)" = "" ]'
