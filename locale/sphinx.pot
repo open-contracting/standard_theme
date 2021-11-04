@@ -1,22 +1,22 @@
 # Translations template for standard_theme.
-# Copyright (C) 2016 ORGANIZATION
+# Copyright (C) 2021 ORGANIZATION
 # This file is distributed under the same license as the standard_theme
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: standard_theme 0.0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-24 10:22+0100\n"
+"POT-Creation-Date: 2021-11-04 19:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: standard_theme/breadcrumbs.html:11
 msgid "Docs"
@@ -35,12 +35,11 @@ msgid "Previous"
 msgstr ""
 
 #: standard_theme/footer.html:16
+#, python-format
 msgid ""
-"Copyright (c) 2014-2016 Open Contracting Partnership, and released under "
-"the <a href=\"https://github.com/open-"
-"contracting/standard/blob/1.0-dev/LICENSE\">Apache License Version "
-"2.0</a>, <a href=\"https://github.com/open-contracting/standard\">source "
-"available on GitHub</a>"
+"Copyright (c) %(theme_copyright)s, and released under the <a "
+"href=\"%(theme_license_url)s\">%(theme_license_name)s</a>, <a "
+"href=\"%(theme_repository_url)s\">source available on GitHub</a>."
 msgstr ""
 
 #: standard_theme/layout.html:35 standard_theme/layout_old.html:122
@@ -65,24 +64,22 @@ msgstr ""
 msgid "Copyright"
 msgstr ""
 
-#: standard_theme/layout.html:107 standard_theme/layout.html:115
+#: standard_theme/layout.html:109 standard_theme/layout.html:120
 msgid "Go"
 msgstr ""
 
-#: standard_theme/layout.html:150 standard_theme/layout.html:189
-msgid " Open Contracting "
+#: standard_theme/layout.html:127
+#, python-format
+msgid "%(project)s"
 msgstr ""
 
-#: standard_theme/layout.html:151 standard_theme/layout.html:189
-msgid " Data Standard "
+#: standard_theme/layout.html:144
+msgid "Developed by"
 msgstr ""
 
-#: standard_theme/layout.html:170
-msgid "Validator"
-msgstr ""
-
-#: standard_theme/layout.html:174
-msgid " Developed By "
+#: standard_theme/layout.html:159
+#, python-format
+msgid "%(theme_short_project)s"
 msgstr ""
 
 #: standard_theme/layout_old.html:29
@@ -111,19 +108,9 @@ msgid ""
 "%(sphinx_version)s."
 msgstr ""
 
-#: standard_theme/search.html:26
+#: standard_theme/search.html:27
 msgid ""
 "Please activate JavaScript to enable the search\n"
 "      functionality."
-msgstr ""
-
-#: standard_theme/search.html:33
-msgid "Search Results"
-msgstr ""
-
-#: standard_theme/search.html:35
-msgid ""
-"Your search did not match any documents. Please make sure that all words "
-"are spelled correctly and that you've selected enough categories."
 msgstr ""
 

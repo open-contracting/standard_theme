@@ -1,25 +1,26 @@
-# Translations template for standard_theme.
+# Spanish translations for standard_theme.
 # Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the standard_theme
 # project.
-# 
+#
 # Translators:
 # Guillem Borrell <guillem@torroja.dmt.upm.es>, 2011
 # Oscar Montiel <miguel.montiel@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: open-contracting-standard-theme\n"
+"Project-Id-Version:  open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-14 11:58+0000\n"
+"POT-Creation-Date: 2021-11-04 19:54-0400\n"
 "PO-Revision-Date: 2016-04-03 00:06+0000\n"
 "Last-Translator: Oscar Montiel <miguel.montiel@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/OpenDataServices/open-contracting-standard-theme/language/es/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.2.0\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: Spanish (http://www.transifex.com/OpenDataServices/open-"
+"contracting-standard-theme/language/es/)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: standard_theme/breadcrumbs.html:11
 msgid "Docs"
@@ -36,6 +37,17 @@ msgstr "Siguiente"
 #: standard_theme/footer.html:8
 msgid "Previous"
 msgstr "Anterior"
+
+#: standard_theme/footer.html:16
+#, python-format
+msgid ""
+"Copyright (c) %(theme_copyright)s, and released under the <a "
+"href=\"%(theme_license_url)s\">%(theme_license_name)s</a>, <a "
+"href=\"%(theme_repository_url)s\">source available on GitHub</a>."
+msgstr ""
+"Copyright (c) %(theme_copyright)s, y publicado bajo la <a "
+"href=\"%(theme_license_url)s\">%(theme_license_name)s</a>, <a "
+"href=\"%(theme_repository_url)s\">fuente disponible en GitHub</a>."
 
 #: standard_theme/layout.html:35 standard_theme/layout_old.html:122
 #, python-format
@@ -59,25 +71,23 @@ msgstr "Búsqueda"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: standard_theme/layout.html:107 standard_theme/layout.html:118
+#: standard_theme/layout.html:109 standard_theme/layout.html:120
 msgid "Go"
 msgstr "Ir a"
 
-#: standard_theme/layout.html:154 standard_theme/layout.html:193
-msgid " Open Contracting "
-msgstr "Contrataciones Abiertas"
+#: standard_theme/layout.html:127
+#, python-format
+msgid "%(project)s"
+msgstr "%(project)s"
 
-#: standard_theme/layout.html:155 standard_theme/layout.html:193
-msgid " Data Standard "
-msgstr "Estándar de Datos"
+#: standard_theme/layout.html:144
+msgid "Developed by"
+msgstr "Desarrollado por"
 
-#: standard_theme/layout.html:174
-msgid "Validator"
-msgstr "Validador"
-
-#: standard_theme/layout.html:178
-msgid " Developed By "
-msgstr "Desarrollado Por"
+#: standard_theme/layout.html:159
+#, python-format
+msgid "%(theme_short_project)s"
+msgstr "%(theme_short_project)s"
 
 #: standard_theme/layout_old.html:29
 msgid "Navigation"
@@ -103,20 +113,15 @@ msgstr "Actualizado por última vez en %(last_updated)s."
 msgid ""
 "Created using <a href=\"http://sphinx-doc.org/\">Sphinx</a> "
 "%(sphinx_version)s."
-msgstr "Creado con <a href=\"http://sphinx-doc.org/\">Sphinx</a> %(sphinx_version)s."
+msgstr ""
+"Creado con <a href=\"http://sphinx-doc.org/\">Sphinx</a> "
+"%(sphinx_version)s."
 
-#: standard_theme/search.html:26
+#: standard_theme/search.html:27
 msgid ""
 "Please activate JavaScript to enable the search\n"
 "      functionality."
-msgstr "Por facor activa JavaScript para mermitir la funcionalidad\nde búsqueda."
+msgstr ""
+"Por facor activa JavaScript para mermitir la funcionalidad\n"
+"de búsqueda."
 
-#: standard_theme/search.html:33
-msgid "Search Results"
-msgstr "Resultados de la búsqueda"
-
-#: standard_theme/search.html:35
-msgid ""
-"Your search did not match any documents. Please make sure that all words are"
-" spelled correctly and that you've selected enough categories."
-msgstr "Su búsqueda no coincide con ningún documentos. Por favor, asegúrese de que todas las palabras estén correctamente escritas y que usted allá seleccionado las suficientes categorías."
