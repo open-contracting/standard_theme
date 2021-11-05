@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install translate-toolkit
-      - run: pip install babel
+      - run: pip install babel jinja2
       - name: Update catalogs
         run: |
           pybabel extract -F babel.cfg -o locale/sphinx.pot -k '_ l_ lazy_gettext' .
