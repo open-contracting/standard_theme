@@ -42,8 +42,7 @@ Preview changes:
 1. Change into the `standard`'s directory
 1. Run `pip install -e path` where `path` is the path to the theme's directory
 1. Run `make` (or `make source` for English only)
-1. Change into the `build` directory
-1. Run `python -m http.server`
+1. Run `python -m http.server --directory build`
 1. Repeat from "Make changes" until done
 
 Commit changes:
