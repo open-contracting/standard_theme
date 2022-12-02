@@ -53,11 +53,13 @@ Commit changes:
 
 ## Translations
 
-The theme uses babel's `setup.py` integration for translations:
-
 Create the pot file:
 
-    python setup.py extract_messages
+    pybabel extract . -F babel.cfg -o locale/sphinx.pot -k '_ l_ lazy_gettext'
+
+Update the po files:
+
+    pybabel update -i locale/sphinx.pot -d locale -D sphinx
 
 Push to Transifex:
 
