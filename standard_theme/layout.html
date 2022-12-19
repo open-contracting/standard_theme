@@ -180,22 +180,9 @@
   {% include "versions.html" %}
 
   {% if not embedded %}
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'{{ url_root }}',
-            VERSION:'{{ release|e }}',
-            LANGUAGE:'{{ language if language else 'en' }}',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}',
-            HAS_SOURCE:  {{ has_source|lower }},
-            SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
-        };
-    </script>
     {%- for scriptfile in script_files %}
       {{ js_tag(scriptfile) }}
     {%- endfor %}
-
   {% endif %}
 
   {# RTD hosts this file, so just load on non RTD builds #}
