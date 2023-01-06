@@ -70,7 +70,7 @@ v0.1.9
 * Intermittent scrollbar visibility bug fixed. This change introduces a
   backwards incompatible change to the theme's layout HTML. This should only be
   a problem for derivative themes that have overridden styling of nav elements
-  using direct decendant selectors. See `#215`_ for more information.
+  using direct descendant selectors. See `#215`_ for more information.
 * Safari overscroll bug fixed
 * Version added to the nav header
 * Revision id was added to the documentation footer if you are using RTD
@@ -144,7 +144,7 @@ Set up your environment
     // Install bower and grunt
     npm install -g bower grunt-cli
 
-    // Now that everything is installed, let's install the theme dependecies.
+    // Now that everything is installed, let's install the theme dependencies.
     npm install
 
 Now that our environment is set up, make sure you're in your virtual environment, go to
