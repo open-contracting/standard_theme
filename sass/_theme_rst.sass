@@ -14,29 +14,41 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 .rst-content
+  // Some browsers like to give arbitrary margins :( make them all consistent.
+  h1, h2, h3, h4, h5, h6
+    margin-bottom: $base-line-height
+
   // Sphinx by default applies HxW style attributes to images. This fixes that oversite.
   img
     max-width: 100%
-    height: auto !important
+    height: auto
 
-  div.figure
+  div.figure, figure
     margin-bottom: $base-line-height
-    p.caption
+    .caption-text
       font-style: italic
-
-  div.figure.align-center
-    text-align: center
+    p:last-child.caption
+      margin-bottom: 0px
+    &.align-center
+      text-align: center
 
   // Usually it's a good idea to give images some space.
-  .section > img,   .section > a > img
-    margin-bottom: $base-line-height
-  // Questionable whether this is nice or not. It styles eternal links, but comes with some baggage.
-  // a.reference.external:after
-  //   font-family: FontAwesome
-  //   content: " \f08e "
-  //   color: $text-light
-  //   vertical-align: super
-  //   font-size: 60%
+  .section >, section >
+    img, a > img
+      margin-bottom: $base-line-height
+
+  // normalize browser styling
+  abbr[title]
+    text-decoration: none
+
+  // Style external links
+  &.style-external-links a.reference.external:after
+    font-family: FontAwesome
+    content: "\f08e"
+    color: $text-light
+    vertical-align: super
+    font-size: 60%
+    margin: 0 0.2em
 
   // For the most part, its safe to assume that sphinx wants you to use a blockquote as an indent. It gets
   // used in many different ways, so don't assume you can apply some fancy style, just leave it be.
@@ -44,12 +56,80 @@
     margin-left: $base-line-height
     line-height: $base-line-height
     margin-bottom: $base-line-height
-  .literal-block, pre.literal-block
-    @extend .codeblock
+
+  pre.literal-block
+    white-space: pre
+    margin: 0
+    padding: ($base-line-height / 2) ($base-line-height / 2)
+    font-family: $code-font-family
+    display: block
+    overflow: auto
+  pre.literal-block, div[class^='highlight']
+    border: 1px solid $table-border-color
+    overflow-x: auto
+    // 1px hack otherwise border won't show. lame
+    margin: 1px 0 $base-line-height 0
+    div[class^='highlight']
+      padding: 0px
+      border: none
+      margin: 0
+  // Needs 100% width for line highlighting to work properly
+  div[class^='highlight'] td.code
+    width: 100%
+  .linenodiv pre
+    border-right: solid 1px lighten($table-border-color, 2%)
+    margin: 0
+    padding: ($base-line-height / 2) ($base-line-height / 2)
+    font-family: $code-font-family
+    user-select: none
+    pointer-events: none
+  div[class^='highlight'] pre
+    white-space: pre
+    margin: 0
+    padding: ($base-line-height / 2) ($base-line-height / 2)
+    display: block
+    overflow: auto
+    & .hll
+      // Line emphasis spans full width
+      display: block
+      margin: 0 (-1 * $base-line-height / 2)
+      padding: 0 ($base-line-height / 2)
+  pre.literal-block, div[class^='highlight'] pre, .linenodiv pre
+    font-family: $code-font-family
+    font-size: 12px
+    line-height: 1.4
+
+  // Do not allow selection of code block prompts and line numbers
+  div.highlight
+    span.linenos, .gp
+      user-select: none
+      pointer-events: none
+
+    span.linenos
+      display: inline-block
+      padding-left: 0px
+      padding-right: ($base-line-height / 2)
+      margin-right: ($base-line-height / 2)
+      border-right: 1px solid lighten($table-border-color, 2%)
+
+  .code-block-caption
+    font-style: italic
+    font-size: 85%
+    line-height: 1
+    padding: 1em 0
+    text-align: center
+
+  @media print
+    .codeblock, div[class^='highlight'], div[class^='highlight'] pre
+      white-space: pre-wrap
+
   // These are the various note pullouts that sphinx applies
-  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, .admonition-todo
+  .note, .attention, .caution, .danger, .error, .hint, .important, .tip, .warning, .seealso, .admonition-todo, .admonition
     @extend .wy-alert
-    .last
+    // These block elements are unsuitable for having floating objects next
+    // to them
+    clear: both
+    .last, > *:last-child
       margin-bottom: 0
   .admonition-title
     @extend .wy-alert-title
@@ -67,22 +147,50 @@
     @extend .wy-alert.wy-alert-warning
   // Some people put tables in notes. Let's give them very basic support.
   .admonition table
-    border-color: rgba(0,0,0,.1)
+    border-color: rgba(0, 0, 0, 0.1)
     td, th
       background: transparent !important
-      border-color: rgba(0,0,0,.1) !important
-  .section ul, .toctree-wrapper ul
-    @extend .wy-plain-list-disc
-  .section ol.loweralpha, .section ol.loweralpha li
-    list-style: lower-alpha
-  .section ol.upperalpha, .section ol.upperalpha li
-    list-style: upper-alpha
-  .section ol, ol.arabic
-    @extend .wy-plain-list-decimal
-  .section ol p, .section ul p
-    margin-bottom: $base-line-height / 2
+      border-color: rgba(0, 0, 0, 0.1) !important
+
+  .section, section, .toctree-wrapper
+    ul
+      @extend .wy-plain-list-disc
+    ol.loweralpha, ol.loweralpha > li
+      list-style: lower-alpha
+    ol.upperalpha, ol.upperalpha > li
+      list-style: upper-alpha
+    ol, ol.arabic
+      @extend .wy-plain-list-decimal
+    // Complex bullet lists, they have more item margins than simple lists
+    ol li, ul li
+      > *
+        margin-top: $base-line-height / 2
+        margin-bottom: $base-line-height / 2
+        &:first-child
+          margin-top: 0rem
+      > p
+        &, &:last-child
+          margin-bottom: $base-line-height / 2
+        &:only-child, &:only-child:last-child
+          margin-bottom: 0rem
+      > ul, > ol
+        margin-bottom: $base-line-height / 2
+    // Simple lists, no item margins
+    ol.simple li, ul.simple li
+      > *
+        margin-top: 0rem
+        margin-bottom: 0rem
+      ul, ol
+        margin-top: 0rem
+        margin-bottom: 0rem
+
   .line-block
+    margin-left: 0px
+    margin-bottom: $base-line-height
+    line-height: $base-line-height
+  .line-block .line-block
     margin-left: $base-line-height
+    margin-bottom: 0px
 
   // Generics handling of headings and toc stuff.
   .topic-title
@@ -98,24 +206,43 @@
     margin: 0px $base-line-height $base-line-height 0px
   .align-center
     margin: auto
-    display: block
-  .toctree-wrapper p.caption
+    // Do not override display:table for tables
+    &:not(table)
+      display: block
+  .toctree-wrapper > p.caption
     @extend h2
 
   // This is the #href that shows up on hover. Sphinx's is terrible so I hack it away.
-  h1, h2, h3, h4, h5, h6, dl dt, p.caption
+  h1, h2, h3, h4, h5, h6, dl dt, p, p.caption, table > caption, .code-block-caption, .eqno
     .headerlink
-      display: none
-      visibility: hidden
+      opacity: 0
       font-size: 14px
+      font-family: FontAwesome
+      margin-left: 0.5em
       @extend .fa
-      &:after
-        visibility: visible
-        content: "\f0c1"
-        font-family: FontAwesome
-        display: inline-block
+      &:focus
+        opacity: 1
     &:hover .headerlink
-      display: inline-block
+      opacity: 1
+
+  // Make links inside paragraphs wrap when they are too long
+  p a
+    overflow-wrap: anywhere
+  // Consistent font sizing for table typography
+  .wy-table
+    th, td
+      p, ul
+        font-size: inherit
+
+  // override the Wyrm accessibility anti-pattern of hiding button focus
+  .btn:focus
+    outline: 2px solid
+
+  table > caption .headerlink:after
+    font-size: 12px
+
+  .centered
+    text-align: center
 
   // Sidebar content. You'll see at the bottom of this file I change it in mobile.
   .sidebar
@@ -129,74 +256,214 @@
     // Sidebar content is usually less relevant, so adjust the margins and sizes.
     p, ul, dl
       font-size: 90%
-    .last
+    .last, > *:last-child
       margin-bottom: 0
     .sidebar-title
       display: block
       font-family: $custom-font-family
       font-weight: bold
       background: $table-border-color
-      padding: $base-line-height / 4 $base-line-height / 2
+      padding: ($base-line-height / 4) ($base-line-height / 2)
       margin: -$base-line-height
       margin-bottom: $base-line-height
       font-size: 100%
   // Sphinx can highlight searched text with ?highlighted=searchterm
   .highlighted
     background: $highlight-color
-    display: inline-block
+    box-shadow: 0 0 0 ($base-line-height / 12) $highlight-color
+    display: inline
     font-weight: bold
-    padding: 0 $base-line-height / 4
 
   // These are the little citation links [1] that show up within paragraphs.
   .footnote-reference, .citation-reference
-    vertical-align: super
+    vertical-align: baseline
+    position: relative
+    top: -0.4em
+    line-height: 0
     font-size: 90%
+    > span.fn-bracket
+      display: none
 
-  // Tables! Sphinx LOVES TABLES. Most of wyrm assumes you're only going to use a table as a table
-  // so I have to write a bunch of unique stuff for Sphinx to style them up differently like it's 2003.
-  table.docutils.citation, table.docutils.footnote
-    background: none
-    border: none
-    color: $gray-light
-    td, tr
+  // Horizontal lists have multiple columns; use full width
+  .hlist
+    width: 100%
+
+  // Definition lists term/classifier separator
+  // Adds a separator for Sphinx > 1.x as a pseudo-element
+  // and hides the hardcoded separator from Sphinx 1.x
+  dl dt span.classifier
+    &:before
+      content: " : "
+  dl dt span.classifier-delimiter
+    display: none !important
+
+  // The html4 writer outputs the citation and footnotes as a table, and the
+  // html5 writer outputs these as a definition list (docutils < 0.18) or an
+  // aside/div (docutils 0.18+). We will use the fairly well supported css
+  // `grid` attributes to make these back into a table
+  // HTML4 writer
+  html.writer-html4 &
+    table.docutils.citation, table.docutils.footnote
+      background: none
       border: none
-      background-color: transparent !important
-      white-space: normal
-    td.label
-      padding-left: 0
-      padding-right: 0
-      vertical-align: top
+      td, tr
+        border: none
+        background-color: transparent !important
+        white-space: normal
+      td.label
+        padding-left: 0
+        padding-right: 0
+        vertical-align: top
+  // HTML5 writer
+  html.writer-html5 &
+    // docutils < 0.18 grid layout. Some spacing is the dl/dt/dd margins
+    dl.footnote, dl.citation, dl.field-list
+      display: grid
+      grid-template-columns: auto minmax(80%, 95%)
+      > dt
+        display: inline-grid
+        grid-template-columns: max-content auto
+    // docutils => 0.18 grid layout
+    aside.footnote, aside.citation, div.citation
+      display: grid
+      // Two any width columns for label and backrefs, a noop column to expand
+      // to fill the width allocated to the first two columns, and then the
+      // content column for the paragraphs.
+      grid-template-columns: auto auto minmax(0.65rem, auto) minmax(40%, 95%)
+      & > span.label
+        grid-column-start: 1
+        grid-column-end: 2
+      & > span.backrefs
+        grid-column-start: 2
+        grid-column-end: 3
+        grid-row-start: 1
+        grid-row-end: 3
+      & > p
+        grid-column-start: 4
+        grid-column-end: 5
+
+    // Shared backrefs styling for docutils versions
+    @mixin footnote-backrefs
+      text-align: left
+      font-style: italic
+      margin-left: .65rem
+      word-break: break-word
+      word-spacing: -0.1rem
+      max-width: 5rem
+
+      > a
+        &:not(:first-child)::before
+          content: " " 
+        word-break: keep-all
+
+    // docutils < 0.18 html5 writer styling
+    dl.footnote, dl.citation, dl.field-list,
+      margin-bottom: $base-line-height
+      > dt
+        padding-left: 1rem
+      > dt, > dd
+        margin-bottom: 0rem
+    dl.footnote, dl.citation
+      font-size: .9rem
+      > dt
+        margin: 0rem 0.5rem 0.5rem 0rem
+        line-height: 1.2rem
+        word-break: break-all
+        font-weight: normal
+        > span.brackets
+          &:before
+            content: "["
+          &:after
+            content: "]"
+        > span.fn-backref
+          @include footnote-backrefs
+      > dd
+        margin: 0rem 0rem 0.5rem 0rem
+        line-height: 1.2rem
+        p
+          font-size: 0.9rem
+
+    // docutils => 0.18 html5 writer styling
+    aside.footnote, aside.citation, div.citation
+      padding-left: 1rem
+      padding-right: 1rem
+      font-size: 0.9rem
+      line-height: 1.2rem
+      p
+        font-size: 0.9rem
+        line-height: 1.2rem
+        margin-bottom: $base-line-height / 2
+      span.backrefs
+        @include footnote-backrefs
+      span.label
+        line-height: 1.2rem
+    aside.footnote-list, aside.citation-list, div.citation-list
+      margin-bottom: $base-line-height
+
+    dl.option-list
+      kbd
+        font-size: 0.9rem
+  // Both
+  html.writer-html4 & table.docutils.citation, table.docutils.footnote,
+  html.writer-html5 & dl.footnote,
+  html.writer-html5 & dl.citation,
+  html.writer-html5 & aside.footnote,
+  html.writer-html5 & aside.footnote-list aside.footnote,
+  html.writer-html5 & div.citation-list > div.citation
+    color: $text-medium
     code
       color: $gray
+
+  // Remove the large vertical space between citations and footnotes
+  .wy-table-responsive.citation, .wy-table-responsive.footnote
+    margin-bottom: 0
+  // Re-add vertical space to element directly following citation and footnotes,
+  // if the following element is of a different type
+  .wy-table-responsive.citation + :not(.citation),
+  .wy-table-responsive.footnote + :not(.footnote)
+    margin-top: $base-line-height
+  // Re-add vertical space after citation and footnotes if it is the last child of a parent
+  .wy-table-responsive.citation:last-child, .wy-table-responsive.footnote:last-child
+    margin-bottom: $base-line-height
   table.docutils
     @extend .wy-table
     @extend .wy-table-bordered-all
+    th
+      border-color: $table-border-color
+      html.writer-html5 &
+        border: 1px solid $table-border-color
+    html.writer-html5 &
+      th > p, td > p
+        line-height: 1rem
+        margin-bottom: 0rem
+        font-size: 0.9rem
     &:not(.field-list)
       @extend .wy-table-striped
-    td p
-      font-size: 100%
+    // Remove bottom margin for the last element (and it's last child)
+    td .last, td .last > *:last-child
+      margin-bottom: 0
   // This table is what gets spit out for auto-generated API stuff. I style it smaller bits of padding.
   table.field-list
     @extend .wy-table
     border: none
     td
       border: none
-      padding-top: 5px
+      p
+        line-height: inherit
     td > strong
       display: inline-block
-      margin-top: 3px
     .field-name
       padding-right: 10px
       text-align: left
       white-space: nowrap
     .field-body
       text-align: left
-      padding-left: 0
 
   // These are the "literals" that get spit out when you mark stuff as ``code`` as your write.
   tt, code
     @extend code
     color: $black
+    font-family: $code-font-family
     padding: 2px 5px
     big, em
       font-size: 100% !important
@@ -204,9 +471,14 @@
 
     &.literal
       color: $text-code-color
+      white-space: normal
     &.xref, a &
       font-weight: bold
       color: $text-codexref-color
+      // https://github.com/readthedocs/sphinx_rtd_theme/issues/1368
+      overflow-wrap: normal
+  pre, kbd, samp
+    font-family: $code-font-family
   // If the literal is inside an a tag, let's color it like a link
   a tt, a code
     color: $link-color
@@ -214,23 +486,25 @@
     margin-bottom: $base-line-height
     dt
       font-weight: bold
+      margin-bottom: $base-line-height / 2
     // Most of the content within these dls are one liners, so I halve the normal margins.
     p, table, ul, ol
-      margin-bottom: $base-line-height / 2 !important
+      margin-bottom: $base-line-height / 2
     // rST seems to want dds to be treated as the browser would, indented.
     dd
-      margin: 0  0 $base-line-height / 2 $base-line-height
-  // This is what Sphinx spits out for it's autodocs. Depending upon what language the person is referencing
-  // these things usually have a class of "method" or "class" or something similar, but really who knows.
-  // Sphinx doesn't give me a generic class on these, so unfortunately I have to apply it to the root dl.
-  // This makes me terribly unhappy and makes this code very nesty. Unfortunately I've seen hand-written docs
-  // that output similar, but not quite the same nesting so this is really the best we can do.
-  dl:not(.docutils)
+      margin: 0 0 ($base-line-height / 2) $base-line-height
+      line-height: $base-line-height
+      > p:last-child,
+      > ol:last-child,
+      > ul:last-child,
+      > table:last-child
+        margin-bottom: 0
+  html.writer-html4 & dl:not(.docutils),
+  html.writer-html5 & dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.citation):not(.glossary):not(.simple)
     margin-bottom: $base-line-height
-    // This would be the equivalent of a .. class::
-    dt
-      display: inline-block
-      margin: $base-line-height / 4 0
+    > dt
+      display: table
+      margin: ($base-line-height / 4) 0
       font-size: 90%
       line-height: normal
       background: lighten($class-color, 50%)
@@ -243,21 +517,21 @@
       .headerlink
         color: $text-color
         font-size: 100% !important
-    // And this would be the .. method::
-    dl dt
+    // In the html4 writer, parameters is a table. In html5 writer, parameters
+    // is a nested dl.field-list
+    dl:not(.option-list):not(.field-list):not(.footnote):not(.citation):not(.glossary):not(.simple) > dt
       margin-bottom: $base-line-height / 4
       border: none
-      border-left: solid 3px hsl(0,0%,80%)
-      background: hsl(0,0%,94%)
+      border-left: solid 3px hsl(0, 0%, 80%)
+      background: hsl(0, 0%, 94%)
       color: $method-color
       .headerlink
         color: $headerlink-color
         font-size: 100% !important
-    dt:first-child
+    > dt:first-child
       margin-top: 0
     // Since dts get the callout style, we treat this less as callouts.
     tt, code
-      font-weight: bold
       &.descname, &.descclassname
         background-color: transparent
         border: none
@@ -274,6 +548,13 @@
     .property
       display: inline-block
       padding-right: 8px
+      max-width: 100%
+    // This is keywords such as "const"
+    .k
+      font-style: italic
+    .sig-name, .descname, .descclassname
+      font-family: $code-font-family
+      color: $black
   // Doc links to sourcecode
   .viewcode-link, .viewcode-back
     display: inline-block
@@ -290,16 +571,39 @@
   code.download
     background: inherit
     padding: inherit
+    font-weight: normal
     font-family: inherit
     font-size: inherit
     color: inherit
     border: inherit
     white-space: inherit
     span:first-child
+      -webkit-font-smoothing: subpixel-antialiased
       @extend .fa
       @extend .fa-download
       &:before
         margin-right: 4px
+  .guilabel
+    border: 1px solid lighten($guilabel-color, 25%)
+    background: lighten($guilabel-color, 50%)
+    font-size: 80%
+    font-weight: 700
+    border-radius: $base-line-height / 6
+    padding: ($base-line-height / 10) ($base-line-height / 4)
+    margin: auto ($base-line-height / 12)
+  *:not(dl.option-list) > :not(dt):not(kbd):not(.kbd) > kbd,
+  *:not(dl.option-list) > :not(dt):not(kbd):not(.kbd) > .kbd
+    color: inherit
+    font-size: 80%
+    background-color: lighten($text-light, 30%)
+    border: 1px solid darken($text-light, 5%)
+    border-radius: $base-line-height / 6
+    box-shadow: grey 0px $base-line-height / 12
+    padding: $base-line-height / 10 $base-line-height / 4
+    margin: auto 0
+  .versionmodified
+    font-style: italic
+
 
 // Mobile specific
 +media($mobile)
