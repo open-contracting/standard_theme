@@ -18,7 +18,7 @@ function render() {
   var baseUrl = location.href.substring(0, location.href.indexOf('/search/?') - 2);
 
   $.ajax({
-    url: 'https://standard.open-contracting.org/search/ocdsindex_en/_search?size=100',
+    url: 'https://standard.open-contracting.org:9200/ocdsindex_en/_search?size=100',
     // The "public" user has read-only access to Elasticsearch indices created by OCDS Index. We set a password
     // only to limit the impact of untargeted scans (e.g. bots).
     headers: {
