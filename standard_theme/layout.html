@@ -1,8 +1,8 @@
 {# TEMPLATE VAR SETTINGS #}
 {%- set url_root = pathto('', 1) %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
-{%- if not embedded and docstitle %}
-  {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+{%- if not embedded and shorttitle %}
+  {%- set titlesuffix = " &mdash; "|safe + shorttitle|e %}
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
