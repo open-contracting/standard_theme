@@ -1,3 +1,31 @@
 [build-system]
 requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "standard_theme"
+dynamic = ["version"]
+authors = [{name = "Open Contracting Partnership", email = "data@open-contracting.org"}]
+description = "Derived from ReadTheDocs.org theme for Sphinx, 2013 version."
+readme = "README.md"
+license = {text = "BSD"}
+urls = {Homepage = "https://github.com/open-contracting/standard_theme"}
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+
+[tool.setuptools]
+packages = ["standard_theme"]
+zip-safe = false
+
+[tool.setuptools.package-data]
+standard_theme = [
+    "theme.conf",
+    "*.html",
+    "static/css/*.css",
+    "static/js/*.js",
+    "static/font/*.*",
+]
