@@ -29,3 +29,12 @@ standard_theme = [
     "static/js/*.js",
     "static/font/*.*",
 ]
+
+# Extraction from Jinja2 HTML templates
+# based on https://github.com/sphinx-doc/sphinx/blob/master/babel.cfg
+[[tool.babel.mappings]]
+method = "jinja2"
+pattern = "**.html"
+encoding = "utf-8"
+ignore_tags = "script,style"
+include_attrs = "alt title summary"
