@@ -37,6 +37,7 @@ function render() {
             }
           },
           "filter": {
+            // https://www.elastic.co/guide/en/elasticsearch/guide/current/_finding_exact_values.html#_term_query_with_text
             "term": {
               "base_url": baseUrl
             }
