@@ -4532,41 +4532,6 @@ div[class^='highlight'] pre {
   width: 207px;
 }
 
-.oc-logo svg {
-  height: 50px;
-  width: 80px;
-  display: inline-block;
-  float: left;
-}
-
-.oc-logo {
-  width: 100%;
-  margin-bottom: 7px !important;
-  position: relative;
-}
-
-.oc-logo h2, .oc-logo .rst-content .toctree-wrapper > p.caption, .rst-content .oc-logo .toctree-wrapper > p.caption {
-  margin-left: 15px;
-  margin-bottom: 0px;
-  display: inline-block;
-  color: white;
-  font-size: 22px;
-}
-
-.oc-logo h2 small, .oc-logo .rst-content .toctree-wrapper > p.caption small, .rst-content .oc-logo .toctree-wrapper > p.caption small {
-  color: #B6C505;
-  position: relative;
-  bottom: 5px;
-}
-
-.oc-logo span {
-  position: absolute;
-  font-family: stratum-1-web, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  top: 50px;
-  left: 25px;
-  color: #B6C505;
-}
-
 .oc-searchbox-wrapper {
   margin-left: 27px;
   margin-top: 20px;
