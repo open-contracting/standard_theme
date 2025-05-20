@@ -37,12 +37,20 @@
 
   {% endif %}
 
-  {% for cssfile in css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+  {% for css_file in css_files %}
+    {%- if css_file|attr("filename") %}
+      {{ css_tag(css_file) }}
+    {%- else %}
+      <link rel="stylesheet" href="{{ pathto(css_file, 1)|escape }}" type="text/css" />
+    {%- endif %}
   {% endfor %}
 
-  {% for cssfile in extra_css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+  {% for css_file in extra_css_files %}
+    {%- if css_file|attr("filename") %}
+      {{ css_tag(css_file) }}
+    {%- else %}
+      <link rel="stylesheet" href="{{ pathto(css_file, 1)|escape }}" type="text/css" />
+    {%- endif %}
   {% endfor %}
 
   {%- block linktags %}
