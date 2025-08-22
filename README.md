@@ -60,11 +60,3 @@ Create the pot file:
 Update the po files:
 
     pybabel update -N -i locale/sphinx.pot -d locale -D sphinx
-
-Push to Transifex:
-
-    tx push -s
-
-Pull from Transifex:
-
-    tx pull
