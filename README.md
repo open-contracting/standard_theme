@@ -53,10 +53,7 @@ Commit changes:
 
 ## Translations
 
-Create the pot file:
-
-    pybabel extract . -F pyproject.toml -o locale/sphinx.pot -k '_ l_ lazy_gettext'
-
-Update the po files:
-
-    pybabel update -N -i locale/sphinx.pot -d locale -D sphinx
+```shell
+pybabel extract . -F pyproject.toml -o locale/sphinx.pot -k '_ l_ lazy_gettext'
+pybabel update -N -i locale/sphinx.pot -d locale -D sphinx
+```
