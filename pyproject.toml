@@ -39,3 +39,6 @@ pattern = "**.html"
 encoding = "utf-8"
 ignore_tags = "script,style"
 include_attrs = "alt title summary"
+
+[tool.uv.pip]
+exclude-newer = "1 week"
