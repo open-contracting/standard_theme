@@ -15,10 +15,13 @@ $(document).ready(function () {
 
 function render() {
   var query = $('#rtd-search-form input[name="q"]').val();
-  var baseUrl = location.href.substring(0, location.href.indexOf('/search/?') - 2);
+  var position = location.href.indexOf('/search/?');
+  // OCDS Index indexes each language directory separately, under a base URL that omits the language code.
+  var baseUrl = location.href.substring(0, position - 2);
+  var language = location.href.substring(position - 2, position);
 
   $.ajax({
-    url: 'https://standard.open-contracting.org/search/ocdsindex_en/_search?size=100',
+    url: 'https://standard.open-contracting.org/search/ocdsindex_' + language + '/_search?size=100',
     // The "public" user has read-only access to Elasticsearch indices created by OCDS Index. We set a password
     // only to limit the impact of untargeted scans (e.g. bots).
     headers: {
@@ -57,9 +60,9 @@ function render() {
 
       $('#search-results').html('<div id="results-count"></div><ul id="results-list" class="search"></ul>');
 
-      var message = "Search finished, found %s page(s) matching the search query.";
+      var message = 'Search finished, found ${resultCount} page(s) matching the search query.';
 
-      var countHtml = (Documentation.TRANSLATIONS[message] || message).replace('%s', data.hits.total.value.toString());
+      var countHtml = Documentation.gettext(message).replace('${resultCount}', data.hits.total.value.toString());
 
       var listHtml = '';
       data.hits.hits.forEach(function (hit) {
