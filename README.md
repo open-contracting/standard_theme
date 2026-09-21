@@ -4,6 +4,58 @@ This is the Sphinx theme used for the [Open Contracting Standard documentation](
 
 We forked the theme rather than inheriting from it, because Sphinx's Jinja templates only allow one level of overrides. By having our own (forked) theme, we can have one theme for all versions of the standard, but make version-specific overrides on the appropriate branch.
 
+## Banners and version switcher
+
+By default, the theme writes a `<!--#include virtual="$BANNER" -->` server-side include into the sidebar, and each
+documentation repository overrides the `version_options` block with another server-side include. Apache's
+`mod_include` resolves both at request time.
+
+Setting the `versions_url` theme option replaces both with markup that [switchers.js](standard_theme/static/js/switchers.js)
+fills in from a `versions.json` document, so that the documentation renders its own banner and version switcher on any
+static host. The two mechanisms are independent: a repository that doesn't set `versions_url` is unaffected.
+
+```python
+html_theme_options = {
+    # Relative to the version's directory, so that the same value works for the staging and live copies.
+    "versions_url": "../versions.json",
+    "branch": os.getenv("GITHUB_REF_NAME", ""),
+}
+```
+
+`versions.json` is a deployment-level artifact, one per documentation root (`/`, `/infrastructure/`, `/profiles/ppp/`,
+…) and one per copy (live and staging). Keeping it outside the build is what allows a new release to reach the pages
+of every already-built version without rebuilding them.
+
+```json
+{
+  "versions": [
+    {"ref": "latest", "label": "1.1.5 (latest)"},
+    {"ref": "1.0", "label": "1.0.3"}
+  ]
+}
+```
+
+- `versions` lists the versions offered by the switcher, current version first. `ref` is the directory below the
+  documentation root; `label` is the text of the option. Omit it to hide the switcher, as a staging copy does: its
+  directories are named after the branch that was pushed, which no static file can enumerate.
+- `staging` (default `false`) switches the banner to the development-copy banner.
+- `live_url` is the link in the development-copy banner. Omit it for no link.
+
+A version that is only an alias, such as a `1.1` directory symlinked to the current version's, is left out of
+`versions`. The theme then shows no banner there, rather than treating it as an old version.
+
+The banner is the theme's, and the page's URL decides which one to show: the development-copy banner if `staging` is
+set, the old-version banner if the URL's version directory is in `versions` but isn't the first one, and no banner
+otherwise. A documentation repository can add a banner of its own by overriding the `banner` block.
+
+`branch` is only a fallback, for a build that is served outside the `{root}/{version}/{language}/` directory layout,
+such as a local build. It matters because a version can be served from more than one directory: `latest` is a symlink
+to the current version's directory, so a page built from the `1.1` branch is old under `/1.0/` but current under
+`/latest/`. Only the URL can tell the two apart.
+
+Without JavaScript, or if `versions.json` is unreachable, the page shows no banner and no version switcher, and the
+language switcher falls back to submitting its form to `{root}/{version}/switcher`.
+
 ## Setting up the environment
 
 The [instructions](/RTD_THEME_README.rst#set-up-your-environment) in the original README are for macOS. On a recent version of Ubuntu (like 15.10), you can run:

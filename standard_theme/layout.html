@@ -97,9 +97,24 @@
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
 
+      {% if theme_versions_url %}
+      {# Filled in by switchers.js, from the versions_url document. #}
+      <div class="oc-banner"></div>
+      {% else %}
       <!--#include virtual="$BANNER" -->
+      {% endif %}
+      {% block banner %}{% endblock %}
 
       <div class="oc-switchers">
+        {% if theme_versions_url %}
+        {# Hidden until switchers.js adds the options, which it reads from the versions_url document. #}
+        {# The style attribute, rather than the hidden attribute, because `.oc-switchers form` sets `display`. #}
+        <form class="oc-version-switcher" style="display: none">
+          <select class="oc-custom-select" name="branch">
+            <option>Version</option>
+          </select>  
+        </form>
+        {% else %}
         <form method="get" action="{{ theme_root_url }}/switcher">
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
             {% block version_options %}
@@ -112,8 +127,9 @@
              <input class="oc-custom-submit" type="submit" value="{% trans %}Go{% endtrans %}" />
           </noscript>
         </form>
-        <form method="get" action="{{ pathto('../switcher') }}">
-          <select class="oc-custom-select" name="lang" onchange="this.form.submit()">
+        {% endif %}
+        <form class="oc-language-switcher" method="get" action="{{ pathto('../switcher') }}">
+          <select class="oc-custom-select" name="lang"{% if not theme_versions_url %} onchange="this.form.submit()"{% endif %}>
             {% block language_options %}
             <option>Language</option>
             <option value="en">English</option>
@@ -195,6 +211,24 @@
   {# RTD hosts this file, so just load on non RTD builds #}
   {% if not READTHEDOCS %}
     <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
+  {% endif %}
+
+  {% if theme_versions_url %}
+  <script type="application/json" id="oc-switchers-config">
+    {
+      "versionsUrl": {{ theme_versions_url|tojson }},
+      "urlRoot": {{ url_root|tojson }},
+      "branch": {{ theme_branch|tojson }},
+      "language": {{ (language or 'en')|tojson }},
+      "messages": {
+        "old": {{ _("This is an old version of the documentation.")|tojson }},
+        "oldLink": {{ _("Go to the latest version: %(version)s.")|tojson }},
+        "staging": {{ _("This is a development copy of the documentation.")|tojson }},
+        "stagingLink": {{ _("Go to the live version.")|tojson }}
+      }
+    }
+  </script>
+  <script src="{{ pathto('_static/js/switchers.js', 1) }}" defer></script>
   {% endif %}
 
   {# STICKY NAVIGATION #}
