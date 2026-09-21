@@ -1,0 +1,7 @@
+Home
+====
+
+.. toctree::
+
+   guidance
+   extra

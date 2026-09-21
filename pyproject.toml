@@ -43,3 +43,10 @@ include_attrs = "alt title summary"
 
 [tool.uv.pip]
 exclude-newer = "1 week"
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "selenium",
+    "sphinx",
+]

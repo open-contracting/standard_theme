@@ -56,6 +56,21 @@ to the current version's directory, so a page built from the `1.1` branch is old
 Without JavaScript, or if `versions.json` is unreachable, the page shows no banner and no version switcher, and the
 language switcher falls back to submitting its form to `{root}/{version}/switcher`.
 
+## Tests
+
+`tests/` builds the Sphinx project in `tests/fixture`, lays it out as the documentation is deployed
+(`{root}/{version}/{language}/`, with a staging copy and an old version), serves it, and drives Chrome over it. Run:
+
+```shell
+uv run --group dev pytest
+```
+
+The tests cover what [switchers.js](standard_theme/static/js/switchers.js) decides, which a Sphinx build alone can't
+show: which banner each deployment state gets, the version switcher's options and its fallback to a version's home
+page when a page is missing there, both switchers navigating to the same page, and the page staying usable without
+JavaScript. One test builds the fixture with `versions_url` empty, to hold the server-side includes unchanged for
+the documentation repositories that haven't migrated.
+
 ## Setting up the environment
 
 The [instructions](/RTD_THEME_README.rst#set-up-your-environment) in the original README are for macOS. On a recent version of Ubuntu (like 15.10), you can run:
