@@ -1,6 +1,10 @@
 {# TEMPLATE VAR SETTINGS #}
 {%- set url_root = pathto('', 1) %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
+{#- This page's URL within its language's directory, as sphinx.builders.dirhtml builds it. #}
+{%- if pagename == 'index' %}{% set page_url = '' %}
+{%- elif pagename.endswith('/index') %}{% set page_url = pagename[:-5] %}
+{%- else %}{% set page_url = pagename ~ '/' %}{% endif %}
 {%- if not embedded and shorttitle %}
   {%- set titlesuffix = " &mdash; "|safe + shorttitle|e %}
 {%- else %}
@@ -128,6 +132,22 @@
           </noscript>
         </form>
         {% endif %}
+        {% if theme_languages %}
+        {# No action: switchers.js navigates, and the links below are the fallback. #}
+        <form class="oc-language-switcher">
+          <select class="oc-custom-select" name="lang">
+            <option>Language</option>
+            {% for code, name in theme_languages.items() %}
+            <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+          </select>  
+          <noscript>
+            {% for code, name in theme_languages.items() %}
+            <a class="oc-language-link" href="{{ url_root }}../{{ code }}/{{ page_url }}">{{ name }}</a>
+            {% endfor %}
+          </noscript>
+        </form>
+        {% else %}
         <form class="oc-language-switcher" method="get" action="{{ pathto('../switcher') }}">
           <select class="oc-custom-select" name="lang"{% if not theme_versions_url %} onchange="this.form.submit()"{% endif %}>
             {% block language_options %}
@@ -139,6 +159,7 @@
             <input class="oc-custom-submit" type="submit" value="{% trans %}Go{% endtrans %}" />
           </noscript>
         </form>
+        {% endif %}
       </div>
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
@@ -213,7 +234,7 @@
     <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
   {% endif %}
 
-  {% if theme_versions_url %}
+  {% if theme_versions_url or theme_languages %}
   <script type="application/json" id="oc-switchers-config">
     {
       "versionsUrl": {{ theme_versions_url|tojson }},

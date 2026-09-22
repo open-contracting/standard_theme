@@ -77,6 +77,11 @@
     });
   }
 
+  // Only the version switcher and the deployment banner need versions.json.
+  if (!config.versionsUrl) {
+    return;
+  }
+
   fetch(new URL(config.versionsUrl, versionRoot))
     .then((response) => {
       if (!response.ok) {

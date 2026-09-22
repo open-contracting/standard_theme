@@ -53,8 +53,26 @@ such as a local build. It matters because a version can be served from more than
 to the current version's directory, so a page built from the `1.1` branch is old under `/1.0/` but current under
 `/latest/`. Only the URL can tell the two apart.
 
-Without JavaScript, or if `versions.json` is unreachable, the page shows no banner and no version switcher, and the
-language switcher falls back to submitting its form to `{root}/{version}/switcher`.
+Without JavaScript, or if `versions.json` is unreachable, the page shows no banner and no version switcher.
+
+## Language switcher
+
+By default, a documentation repository overrides the `language_options` block with `<option>` elements, and the
+switcher submits its form to `{root}/{version}/switcher`, which Apache rewrites using the HTTP referer.
+
+Setting the `languages` theme option instead builds the options from the option, and adds a `<noscript>` list of
+relative links to the same page in each language:
+
+```python
+html_theme_options = {
+    "languages": {"en": "English", "es": "Español"},
+}
+```
+
+The links need no server and no JavaScript, so the form drops its `action`, and the `{root}/{version}/switcher`
+rewrites can go. `versions_url` and `languages` are independent: setting either one loads
+[switchers.js](standard_theme/static/js/switchers.js), which navigates on `change` for whichever switchers are
+present. A repository that sets `languages` no longer overrides the `language_options` block.
 
 ## Tests
 

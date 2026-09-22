@@ -130,7 +130,7 @@ def test_language_switcher_from_home_page(browser, server):
     switch(browser, "lang", "Español", server, "/profiles/test/latest/es/")
 
 
-# Without JavaScript there is no banner and no version switcher, and the language switcher submits its form.
+# Without JavaScript there is no banner and no version switcher, and the language switcher falls back to links.
 def test_degrades_without_javascript(browser_without_javascript, server):
     browser = browser_without_javascript
     browser.get(f"{server}{OLD}")
@@ -140,9 +140,46 @@ def test_degrades_without_javascript(browser_without_javascript, server):
     assert not browser.find_element(
         By.CSS_SELECTOR, ".oc-version-switcher"
     ).is_displayed()
-    assert browser.find_element(By.CSS_SELECTOR, ".oc-language-switcher").get_attribute(
-        "action"
-    ) == (f"{server}/profiles/test/1.0/switcher/")
+
+
+# The links are relative, so they need no server: this is what replaces posting to `{root}/{version}/switcher`.
+@pytest.mark.parametrize(
+    ("path", "expected"),
+    [
+        (CURRENT, ["/profiles/test/latest/en/", "/profiles/test/latest/es/"]),
+        (
+            f"{CURRENT}guidance/",
+            [
+                "/profiles/test/latest/en/guidance/",
+                "/profiles/test/latest/es/guidance/",
+            ],
+        ),
+        (OLD, ["/profiles/test/1.0/en/", "/profiles/test/1.0/es/"]),
+    ],
+)
+def test_language_links_without_javascript(
+    browser_without_javascript, server, path, expected
+):
+    browser = browser_without_javascript
+    browser.get(f"{server}{path}")
+
+    links = browser.find_elements(By.CSS_SELECTOR, ".oc-language-link")
+    assert [link.get_attribute("href") for link in links] == [
+        f"{server}{url}" for url in expected
+    ]
+
+
+def test_language_link_navigates_without_javascript(browser_without_javascript, server):
+    browser = browser_without_javascript
+    browser.get(f"{server}{CURRENT}guidance/")
+
+    [
+        link
+        for link in browser.find_elements(By.CSS_SELECTOR, ".oc-language-link")
+        if link.text == "Español"
+    ][0].click()
+
+    assert browser.current_url == f"{server}/profiles/test/latest/es/guidance/"
 
 
 def test_no_server_side_includes(site):
