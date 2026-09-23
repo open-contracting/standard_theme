@@ -92,20 +92,20 @@ msgstr "%(theme_short_project)s"
 
 #: standard_theme/layout.html:224
 msgid "This is an old version of the documentation."
-msgstr ""
+msgstr "Ceci est une ancienne version de la documentation."
 
 #: standard_theme/layout.html:225
 #, python-format
 msgid "Go to the latest version: %(version)s."
-msgstr ""
+msgstr "Aller à la dernière version : %(version)s."
 
 #: standard_theme/layout.html:226
 msgid "This is a development copy of the documentation."
-msgstr ""
+msgstr "Ceci est une copie de développement de la documentation."
 
 #: standard_theme/layout.html:227
 msgid "Go to the live version."
-msgstr ""
+msgstr "Aller à la version en ligne."
 
 #: standard_theme/layout_old.html:29
 msgid "Navigation"

@@ -6,25 +6,18 @@ We forked the theme rather than inheriting from it, because Sphinx's Jinja templ
 
 ## Banners and version switcher
 
-By default, the theme writes a `<!--#include virtual="$BANNER" -->` server-side include into the sidebar, and each
-documentation repository overrides the `version_options` block with another server-side include. Apache's
-`mod_include` resolves both at request time.
-
-Setting the `versions_url` theme option replaces both with markup that [switchers.js](standard_theme/static/js/switchers.js)
-fills in from a `versions.json` document, so that the documentation renders its own banner and version switcher on any
-static host. The two mechanisms are independent: a repository that doesn't set `versions_url` is unaffected.
+Set the `versions_url` theme option to render the sidebar's banner and version switcher from a `versions.json` document, instead of from Apache's server-side includes.
 
 ```python
 html_theme_options = {
-    # Relative to the version's directory, so that the same value works for the staging and live copies.
+    # Relative to the version's directory, so that one value serves the live and staging copies.
     "versions_url": "../versions.json",
+    # Optional, for a build whose URL has no version directory, like a local build.
     "branch": os.getenv("GITHUB_REF_NAME", ""),
 }
 ```
 
-`versions.json` is a deployment-level artifact, one per documentation root (`/`, `/infrastructure/`, `/profiles/ppp/`,
-…) and one per copy (live and staging). Keeping it outside the build is what allows a new release to reach the pages
-of every already-built version without rebuilding them.
+Serve a `versions.json` at each documentation root (`/`, `/infrastructure/`, `/profiles/ppp/`, …) and at each staging root. Edit it on release: every published page reads it, so no version is rebuilt.
 
 ```json
 {
@@ -35,33 +28,18 @@ of every already-built version without rebuilding them.
 }
 ```
 
-- `versions` lists the versions offered by the switcher, current version first. `ref` is the directory below the
-  documentation root; `label` is the text of the option. Omit it to hide the switcher, as a staging copy does: its
-  directories are named after the branch that was pushed, which no static file can enumerate.
-- `staging` (default `false`) switches the banner to the development-copy banner.
-- `live_url` is the link in the development-copy banner. Omit it for no link.
+- `versions` lists the versions the switcher offers, current version first. `ref` is the directory below the documentation root, and `label` is the option's text.
+- Omit `versions` to hide the switcher, as a staging copy does: its directories are named after the branch that was pushed.
+- Omit a directory that is only an alias, like a `1.1` symlinked to the current version's. The theme shows no banner on an unlisted version, rather than treating it as old.
+- `staging` (default `false`) shows the development-copy banner, and `live_url` is that banner's link. Omit `live_url` for no link.
 
-A version that is only an alias, such as a `1.1` directory symlinked to the current version's, is left out of
-`versions`. The theme then shows no banner there, rather than treating it as an old version.
+The page's URL decides the banner: the development-copy banner under a `staging` root, the old-version banner where the URL's version directory is listed but isn't the first, and no banner otherwise. Override the `banner` block to add a banner of the repository's own, which renders regardless.
 
-The banner is the theme's, and the page's URL decides which one to show: the development-copy banner if `staging` is
-set, the old-version banner if the URL's version directory is in `versions` but isn't the first one, and no banner
-otherwise. A documentation repository can add a banner of its own by overriding the `banner` block.
-
-`branch` is only a fallback, for a build that is served outside the `{root}/{version}/{language}/` directory layout,
-such as a local build. It matters because a version can be served from more than one directory: `latest` is a symlink
-to the current version's directory, so a page built from the `1.1` branch is old under `/1.0/` but current under
-`/latest/`. Only the URL can tell the two apart.
-
-Without JavaScript, or if `versions.json` is unreachable, the page shows no banner and no version switcher.
+Without `versions_url`, the theme writes `<!--#include virtual="$BANNER" -->` and the `version_options` block, for Apache's `mod_include` to resolve at request time. Without JavaScript, or where `versions.json` is unreachable, the page has no banner and no version switcher.
 
 ## Language switcher
 
-By default, a documentation repository overrides the `language_options` block with `<option>` elements, and the
-switcher submits its form to `{root}/{version}/switcher`, which Apache rewrites using the HTTP referer.
-
-Setting the `languages` theme option instead builds the options from the option, and adds a `<noscript>` list of
-relative links to the same page in each language:
+Set the `languages` theme option to build the switcher's options, and a `<noscript>` list of relative links to the same page in each language.
 
 ```python
 html_theme_options = {
@@ -69,25 +47,19 @@ html_theme_options = {
 }
 ```
 
-The links need no server and no JavaScript, so the form drops its `action`, and the `{root}/{version}/switcher`
-rewrites can go. `versions_url` and `languages` are independent: setting either one loads
-[switchers.js](standard_theme/static/js/switchers.js), which navigates on `change` for whichever switchers are
-present. A repository that sets `languages` no longer overrides the `language_options` block.
+The links need no server, so the form has no `action`. Without the option, the theme uses the `language_options` block, and submits the form to `{root}/{version}/switcher` for Apache to rewrite.
+
+`versions_url` and `languages` are independent. Setting either loads [switchers.js](standard_theme/static/js/switchers.js), which navigates on `change`, checking that the target page exists before leaving the current one.
 
 ## Tests
 
-`tests/` builds the Sphinx project in `tests/fixture`, lays it out as the documentation is deployed
-(`{root}/{version}/{language}/`, with a staging copy and an old version), serves it, and drives Chrome over it. Run:
+`tests/` builds the Sphinx project in `tests/fixture`, lays it out as the documentation is deployed (`{root}/{version}/{language}/`, with a staging copy and an old version), serves it, and drives Chrome over it.
 
 ```shell
 uv run --group dev pytest
 ```
 
-The tests cover what [switchers.js](standard_theme/static/js/switchers.js) decides, which a Sphinx build alone can't
-show: which banner each deployment state gets, the version switcher's options and its fallback to a version's home
-page when a page is missing there, both switchers navigating to the same page, and the page staying usable without
-JavaScript. One test builds the fixture with `versions_url` empty, to hold the server-side includes unchanged for
-the documentation repositories that haven't migrated.
+The tests cover what [switchers.js](standard_theme/static/js/switchers.js) decides, which a Sphinx build alone can't show: which banner each deployment state gets, the version switcher's options and its fallback to a version's home page, both switchers navigating to the same page, and the page without JavaScript. One test builds with `versions_url` empty, to hold the server-side includes unchanged for the documentation repositories that haven't migrated.
 
 ## Setting up the environment
 

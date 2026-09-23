@@ -111,12 +111,11 @@
 
       <div class="oc-switchers">
         {% if theme_versions_url %}
-        {# Hidden until switchers.js adds the options, which it reads from the versions_url document. #}
-        {# The style attribute, rather than the hidden attribute, because `.oc-switchers form` sets `display`. #}
+        {# Hidden until switchers.js adds the options. A style attribute, because `.oc-switchers form` sets `display`. #}
         <form class="oc-version-switcher" style="display: none">
           <select class="oc-custom-select" name="branch">
             <option>Version</option>
-          </select>  
+          </select>
         </form>
         {% else %}
         <form method="get" action="{{ theme_root_url }}/switcher">
@@ -140,7 +139,7 @@
             {% for code, name in theme_languages.items() %}
             <option value="{{ code }}">{{ name }}</option>
             {% endfor %}
-          </select>  
+          </select>
           <noscript>
             {% for code, name in theme_languages.items() %}
             <a class="oc-language-link" href="{{ url_root }}../{{ code }}/{{ page_url }}">{{ name }}</a>

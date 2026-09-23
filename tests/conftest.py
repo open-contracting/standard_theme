@@ -84,6 +84,8 @@ def server(site):
 def _browser(*, javascript=True):
     options = Options()
     options.add_argument("--headless=new")
+    # The fixture is local, and this saves CI from relaxing AppArmor for Chrome's user namespaces.
+    options.add_argument("--no-sandbox")
     # The sidebar, which holds the banner and the switchers, is off-screen at narrow widths.
     options.add_argument("--window-size=1600,1200")
     if not javascript:

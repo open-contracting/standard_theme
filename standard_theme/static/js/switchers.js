@@ -1,24 +1,20 @@
-// Render the deployment banner and the version switcher's options, and make both switchers navigate client-side.
+// Render the deployment banner, fill in the version switcher, and navigate on either switcher's change event.
 //
-// This file is not part of the Grunt build. Edit it in place.
+// Not part of the Grunt build: edit this file in place.
 //
-// The page's own URL is the source of truth for which version and language the reader is on, because one version can
-// be served from more than one directory (`latest` is a symlink to the current version's directory). The `branch` and
-// `language` settings are fallbacks, for a build that is served outside the deployed directory layout.
-(() => {
+// The page's URL, not the `branch` setting, decides which version the reader is on, because one version is served
+// from more than one directory: `latest` is a symlink to the current version's directory.
+(async () => {
   const element = document.getElementById("oc-switchers-config");
   if (!element) {
     return;
   }
   const config = JSON.parse(element.textContent);
 
-  // The last path component of a directory URL.
-  function basename(url) {
-    const components = url.pathname.split("/").filter(Boolean);
-    return components.length ? components[components.length - 1] : "";
-  }
+  // The last component of a directory URL's path.
+  const basename = (url) => url.pathname.split("/").filter(Boolean).pop() || "";
 
-  // `urlRoot` is the relative path from this page to the root of this language's documentation.
+  // `urlRoot` is this page's path to the root of its language's documentation.
   const languageRoot = new URL(config.urlRoot || "", location.href);
   const versionRoot = new URL("../", languageRoot);
   const documentationRoot = new URL("../", versionRoot);
@@ -30,35 +26,33 @@
     : "";
 
   // Go to the first URL that exists, or to the last URL if none do.
-  function navigate(urls) {
-    const attempt = (index) => {
-      if (index === urls.length - 1) {
-        location.assign(urls[index]);
-        return;
+  async function navigate(urls) {
+    for (const url of urls.slice(0, -1)) {
+      try {
+        if ((await fetch(url, { method: "HEAD" })).ok) {
+          location.assign(url);
+          return;
+        }
+      } catch {
+        // Try the next URL.
       }
-      fetch(urls[index], { method: "HEAD" }).then(
-        (response) => (response.ok ? location.assign(urls[index]) : attempt(index + 1)),
-        () => attempt(index + 1),
-      );
-    };
-    attempt(0);
+    }
+    location.assign(urls[urls.length - 1]);
   }
 
-  // Switch on the selected option's `value` attribute, to ignore the "Version" and "Language" placeholder options.
-  function onChange(select, callback) {
-    select.addEventListener("change", function () {
+  // The `value` attribute is absent from the "Version" and "Language" placeholder options.
+  function onChange(selector, callback) {
+    const select = document.querySelector(`${selector} select`);
+    select?.addEventListener("change", function () {
       const option = this.selectedOptions[0];
       if (option?.hasAttribute("value")) {
         callback(option.value);
       }
     });
+    return select;
   }
 
-  function addBanner(text, url, linkText) {
-    const container = document.querySelector(".oc-banner");
-    if (!container) {
-      return;
-    }
+  function addBanner(container, text, url, linkText) {
     container.classList.add("oc-fixed-alert-header");
     container.append(text);
     if (url) {
@@ -69,61 +63,55 @@
     }
   }
 
-  const languageSelect = document.querySelector(".oc-language-switcher select");
-  if (languageSelect) {
-    onChange(languageSelect, (value) => {
-      const root = new URL(`${value}/`, versionRoot);
-      navigate([new URL(path, root).href, root.href]);
-    });
-  }
+  onChange(".oc-language-switcher", (code) => {
+    const root = new URL(`${code}/`, versionRoot);
+    navigate([new URL(path, root).href, root.href]);
+  });
 
-  // Only the version switcher and the deployment banner need versions.json.
+  // Only the banner and the version switcher need versions.json.
   if (!config.versionsUrl) {
     return;
   }
 
-  fetch(new URL(config.versionsUrl, versionRoot))
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const versions = data.versions || [];
-      // The first version is the current version.
-      const current = versions[0];
+  let data;
+  try {
+    const response = await fetch(new URL(config.versionsUrl, versionRoot));
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+    data = await response.json();
+  } catch (error) {
+    // Leave the page without a banner and without a version switcher.
+    console.warn(`Can't use ${config.versionsUrl}: ${error.message}`);
+    return;
+  }
 
-      if (data.staging) {
-        addBanner(config.messages.staging, data.live_url, config.messages.stagingLink);
-      } else if (current && branch !== current.ref && versions.some((version) => version.ref === branch)) {
-        addBanner(
-          config.messages.old,
-          new URL(`${current.ref}/${language}/`, documentationRoot).href,
-          config.messages.oldLink.replace("%(version)s", current.label),
-        );
-      }
+  const versions = data.versions || [];
+  const current = versions[0];
+  const banner = document.querySelector(".oc-banner");
 
-      const form = document.querySelector(".oc-version-switcher");
-      const select = form?.querySelector("select");
-      if (!select || !versions.length) {
-        return;
-      }
+  if (banner && data.staging) {
+    addBanner(banner, config.messages.staging, data.live_url, config.messages.stagingLink);
+  } else if (banner && current && branch !== current.ref && versions.some((version) => version.ref === branch)) {
+    const url = new URL(`${current.ref}/${language}/`, documentationRoot).href;
+    addBanner(banner, config.messages.old, url, config.messages.oldLink.replace("%(version)s", current.label));
+  }
 
-      for (const version of versions) {
-        const option = document.createElement("option");
-        option.value = version.ref;
-        option.textContent = version.label;
-        select.append(option);
-      }
+  const select = onChange(".oc-version-switcher", (ref) => {
+    const root = new URL(`${ref}/`, documentationRoot);
+    navigate([new URL(`${language}/${path}`, root).href, new URL(`${language}/`, root).href, root.href]);
+  });
+  if (!select || !versions.length) {
+    return;
+  }
 
-      onChange(select, (value) => {
-        const root = new URL(`${value}/`, documentationRoot);
-        navigate([new URL(`${language}/${path}`, root).href, new URL(`${language}/`, root).href, root.href]);
-      });
+  for (const version of versions) {
+    const option = document.createElement("option");
+    option.value = version.ref;
+    option.textContent = version.label;
+    select.append(option);
+  }
 
-      form.style.display = "";
-    })
-    // Leave the page as-is: no banner, and no version switcher.
-    .catch((error) => console.warn(`Can't use ${config.versionsUrl}: ${error.message}`));
+  // `.oc-switchers form` sets `display`, which overrides the hidden attribute.
+  select.form.style.display = "";
 })();
