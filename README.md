@@ -56,6 +56,7 @@ The links need no server, so the form has no `action`. Without the option, the t
 `tests/` builds the Sphinx project in `tests/fixture`, lays it out as the documentation is deployed (`{root}/{version}/{language}/`, with a staging copy and an old version), serves it, and drives Chrome over it.
 
 ```shell
+uv run --group dev playwright install chromium
 uv run --group dev pytest
 ```
 

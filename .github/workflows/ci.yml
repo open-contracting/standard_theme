@@ -10,5 +10,6 @@ jobs:
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'
-      - run: pip install -e . pytest selenium sphinx
+      - run: pip install -e . playwright pytest sphinx
+      - run: playwright install --with-deps chromium
       - run: pytest

@@ -8,8 +8,7 @@ import threading
 from pathlib import Path
 
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from playwright.sync_api import sync_playwright
 
 FIXTURE = Path(__file__).parent / "fixture"
 
@@ -23,6 +22,9 @@ VERSIONS = {
 STAGING = {"staging": True, "live_url": "/profiles/test/latest/en/"}
 
 LANGUAGES = ("en", "es")
+
+# The sidebar, which holds the banner and the switchers, is off-screen at narrow widths.
+VIEWPORT = {"width": 1600, "height": 1200}
 
 
 def build(destination, *, language="en", **environ):
@@ -81,36 +83,29 @@ def server(site):
     httpd.shutdown()
 
 
-def _browser(*, javascript=True):
-    options = Options()
-    options.add_argument("--headless=new")
-    # The fixture is local, and this saves CI from relaxing AppArmor for Chrome's user namespaces.
-    options.add_argument("--no-sandbox")
-    # The sidebar, which holds the banner and the switchers, is off-screen at narrow widths.
-    options.add_argument("--window-size=1600,1200")
-    if not javascript:
-        options.add_experimental_option(
-            "prefs", {"profile.managed_default_content_settings.javascript": 2}
-        )
-
-    browser = webdriver.Chrome(options=options)
-    browser.implicitly_wait(3)
-    return browser
-
-
 @pytest.fixture(scope="session")
 def browser():
-    browser = _browser()
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
 
-    yield browser
+        yield browser
 
-    browser.quit()
+        browser.close()
 
 
 @pytest.fixture
-def browser_without_javascript():
-    browser = _browser(javascript=False)
+def page(browser):
+    page = browser.new_page(viewport=VIEWPORT)
 
-    yield browser
+    yield page
 
-    browser.quit()
+    page.close()
+
+
+@pytest.fixture
+def page_without_javascript(browser):
+    context = browser.new_context(viewport=VIEWPORT, java_script_enabled=False)
+
+    yield context.new_page()
+
+    context.close()
