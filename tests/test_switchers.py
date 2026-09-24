@@ -1,5 +1,7 @@
 """Test the banner and the switchers that switchers.js renders from a versions.json document."""
 
+import json
+
 import pytest
 from playwright.sync_api import expect
 
@@ -16,6 +18,8 @@ CURRENT = "/profiles/test/latest/en/"
 OLD = "/profiles/test/1.0/en/"
 STAGING = "/staging/profiles/test/some-branch/en/"
 UNCONFIGURED = "/profiles/unconfigured/latest/en/"
+LONE = "/profiles/lone/latest/en/"
+RERELEASE = "/profiles/rerelease/latest/en/"
 
 
 def hrefs(page, selector):
@@ -56,7 +60,7 @@ def test_version_options(page, server):
 
 
 # A staging copy lists no versions, because its directories are named after the branch that was pushed.
-@pytest.mark.parametrize("path", [STAGING, UNCONFIGURED])
+@pytest.mark.parametrize("path", [STAGING, UNCONFIGURED, LONE])
 def test_version_switcher_hidden(page, server, path):
     page.goto(f"{server}{path}")
 
@@ -152,6 +156,36 @@ def test_no_language_switcher_for_one_language(tmp_path):
     # The version switcher and the banner are unaffected.
     assert 'name="branch"' in html
     assert "oc-banner" in html
+
+
+# With one version and one language, the bar would be empty, so it goes.
+def test_switchers_removed_when_empty(page, server):
+    page.goto(f"{server}{LONE}")
+
+    expect(page.locator(".oc-switchers")).to_have_count(0)
+
+
+# versions.json is read at view time, so a release reaches published pages without rebuilding them.
+def test_version_switcher_appears_without_rebuild(page, server, site):
+    page.goto(f"{server}{RERELEASE}")
+    expect(page.locator(".oc-switchers")).to_have_count(0)
+
+    (site / "profiles/rerelease/versions.json").write_text(
+        json.dumps(
+            {
+                "versions": [
+                    {"ref": "latest", "label": "2.0 (latest)"},
+                    {"ref": "1.0", "label": "1.0"},
+                ]
+            }
+        )
+    )
+    page.reload()
+
+    expect(page.locator(".oc-version-switcher")).to_be_visible()
+    expect(page.locator("select[name=branch] option")).to_have_text(
+        ["Version", "2.0 (latest)", "1.0"]
+    )
 
 
 def test_no_server_side_includes(site):

@@ -28,7 +28,7 @@ Serve a `versions.json` at each documentation root (`/`, `/infrastructure/`, `/p
 }
 ```
 
-- `versions` lists the versions the switcher offers, current version first. `ref` is the directory below the documentation root, and `label` is the option's text.
+- `versions` lists the versions the switcher offers, current version first. `ref` is the directory below the documentation root, and `label` is the option's text. Below two versions the switcher is left out, and where neither switcher has anything to offer the bar goes with them.
 - Omit `versions` to hide the switcher, as a staging copy does: its directories are named after the branch that was pushed.
 - Omit a directory that is only an alias, like a `1.1` symlinked to the current version's. The theme shows no banner on an unlisted version, rather than treating it as old.
 - `staging` (default `false`) shows the development-copy banner, and `live_url` is that banner's link. Omit `live_url` for no link.

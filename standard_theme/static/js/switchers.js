@@ -63,55 +63,65 @@
     }
   }
 
-  onChange(".oc-language-switcher", (code) => {
+  // Render the banner and fill in the version switcher, and report whether the switcher has anything to offer.
+  async function versionSwitcher() {
+    // Only the banner and the version switcher need versions.json.
+    if (!config.versionsUrl) {
+      return false;
+    }
+
+    let data;
+    try {
+      // Revalidate, so that an edit to versions.json reaches a reader who has visited before, whatever the host sets.
+      const response = await fetch(new URL(config.versionsUrl, versionRoot), { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      data = await response.json();
+    } catch (error) {
+      // Leave the page without a banner and without a version switcher.
+      console.warn(`Can't use ${config.versionsUrl}: ${error.message}`);
+      return false;
+    }
+
+    const versions = data.versions || [];
+    const current = versions[0];
+    const banner = document.querySelector(".oc-banner");
+
+    if (banner && data.staging) {
+      addBanner(banner, config.messages.staging, data.live_url, config.messages.stagingLink);
+    } else if (banner && current && branch !== current.ref && versions.some((version) => version.ref === branch)) {
+      const url = new URL(`${current.ref}/${language}/`, documentationRoot).href;
+      addBanner(banner, config.messages.old, url, config.messages.oldLink.replace("%(version)s", current.label));
+    }
+
+    const select = onChange(".oc-version-switcher", (ref) => {
+      const root = new URL(`${ref}/`, documentationRoot);
+      navigate([new URL(`${language}/${path}`, root).href, new URL(`${language}/`, root).href, root.href]);
+    });
+    // Nothing to switch to below two versions.
+    if (!select || versions.length < 2) {
+      return false;
+    }
+
+    for (const version of versions) {
+      const option = document.createElement("option");
+      option.value = version.ref;
+      option.textContent = version.label;
+      select.append(option);
+    }
+
+    // `.oc-switchers form` sets `display`, which overrides the hidden attribute.
+    select.form.style.display = "";
+    return true;
+  }
+
+  const languageSelect = onChange(".oc-language-switcher", (code) => {
     const root = new URL(`${code}/`, versionRoot);
     navigate([new URL(path, root).href, root.href]);
   });
 
-  // Only the banner and the version switcher need versions.json.
-  if (!config.versionsUrl) {
-    return;
+  if (!(await versionSwitcher()) && !languageSelect) {
+    document.querySelector(".oc-switchers")?.remove();
   }
-
-  let data;
-  try {
-    const response = await fetch(new URL(config.versionsUrl, versionRoot));
-    if (!response.ok) {
-      throw new Error(`${response.status} ${response.statusText}`);
-    }
-    data = await response.json();
-  } catch (error) {
-    // Leave the page without a banner and without a version switcher.
-    console.warn(`Can't use ${config.versionsUrl}: ${error.message}`);
-    return;
-  }
-
-  const versions = data.versions || [];
-  const current = versions[0];
-  const banner = document.querySelector(".oc-banner");
-
-  if (banner && data.staging) {
-    addBanner(banner, config.messages.staging, data.live_url, config.messages.stagingLink);
-  } else if (banner && current && branch !== current.ref && versions.some((version) => version.ref === branch)) {
-    const url = new URL(`${current.ref}/${language}/`, documentationRoot).href;
-    addBanner(banner, config.messages.old, url, config.messages.oldLink.replace("%(version)s", current.label));
-  }
-
-  const select = onChange(".oc-version-switcher", (ref) => {
-    const root = new URL(`${ref}/`, documentationRoot);
-    navigate([new URL(`${language}/${path}`, root).href, new URL(`${language}/`, root).href, root.href]);
-  });
-  if (!select || !versions.length) {
-    return;
-  }
-
-  for (const version of versions) {
-    const option = document.createElement("option");
-    option.value = version.ref;
-    option.textContent = version.label;
-    select.append(option);
-  }
-
-  // `.oc-switchers form` sets `display`, which overrides the hidden attribute.
-  select.form.style.display = "";
 })();

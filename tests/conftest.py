@@ -20,6 +20,7 @@ VERSIONS = {
     ]
 }
 STAGING = {"staging": True, "live_url": "/profiles/test/latest/en/"}
+ONE_VERSION = {"versions": [{"ref": "latest", "label": "2.0 (latest)"}]}
 
 LANGUAGES = ("en", "es")
 
@@ -64,7 +65,13 @@ def site(tmp_path_factory):
     # A root with no versions.json, to exercise degrading when it is unreachable.
     shutil.copytree(current, root / "profiles/unconfigured/latest")
 
+    # One version and one language, so that neither switcher has anything to offer.
+    build(root / "profiles/lone/latest/en", FIXTURE_LANGUAGES="en:English")
+    shutil.copytree(root / "profiles/lone", root / "profiles/rerelease")
+
     (root / "profiles/test/versions.json").write_text(json.dumps(VERSIONS))
+    for name in ("lone", "rerelease"):
+        (root / "profiles" / name / "versions.json").write_text(json.dumps(ONE_VERSION))
     (root / "staging/profiles/test/versions.json").write_text(json.dumps(STAGING))
 
     return root
