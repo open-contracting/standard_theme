@@ -142,6 +142,18 @@ def test_language_link_navigates_without_javascript(page_without_javascript, ser
     page.wait_for_url(f"{server}/profiles/test/latest/es/guidance/")
 
 
+# A dropdown whose only option is the page you are on is not worth showing.
+def test_no_language_switcher_for_one_language(tmp_path):
+    build(tmp_path, FIXTURE_LANGUAGES="en:English")
+    html = (tmp_path / "index.html").read_text()
+
+    assert 'name="lang"' not in html
+    assert "oc-language-link" not in html
+    # The version switcher and the banner are unaffected.
+    assert 'name="branch"' in html
+    assert "oc-banner" in html
+
+
 def test_no_server_side_includes(site):
     assert (
         "<!--#include" not in (site / "profiles/test/latest/en/index.html").read_text()

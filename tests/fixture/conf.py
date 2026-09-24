@@ -15,5 +15,8 @@ html_theme_options = {
     # Empty for the server-side include, which is what a documentation repository that hasn't migrated emits.
     "versions_url": os.getenv("FIXTURE_VERSIONS_URL", "../versions.json"),
     "branch": os.getenv("FIXTURE_BRANCH", ""),
-    "languages": {"en": "English", "es": "Español"},
+    "languages": dict(
+        pair.split(":")
+        for pair in os.getenv("FIXTURE_LANGUAGES", "en:English,es:Español").split(",")
+    ),
 }

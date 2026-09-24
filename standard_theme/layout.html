@@ -132,6 +132,8 @@
         </form>
         {% endif %}
         {% if theme_languages %}
+        {# Nothing to switch to below two languages. #}
+        {% if theme_languages|length > 1 %}
         {# No action: switchers.js navigates, and the links below are the fallback. #}
         <form class="oc-language-switcher">
           <select class="oc-custom-select" name="lang">
@@ -146,6 +148,7 @@
             {% endfor %}
           </noscript>
         </form>
+        {% endif %}
         {% else %}
         <form class="oc-language-switcher" method="get" action="{{ pathto('../switcher') }}">
           <select class="oc-custom-select" name="lang"{% if not theme_versions_url %} onchange="this.form.submit()"{% endif %}>

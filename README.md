@@ -47,7 +47,7 @@ html_theme_options = {
 }
 ```
 
-The links need no server, so the form has no `action`. Without the option, the theme uses the `language_options` block, and submits the form to `{root}/{version}/switcher` for Apache to rewrite.
+The links need no server, so the form has no `action`. Below two languages the switcher is left out, since its only option would be the page the reader is on. Without the option, the theme uses the `language_options` block, and submits the form to `{root}/{version}/switcher` for Apache to rewrite.
 
 `versions_url` and `languages` are independent. Setting either loads [switchers.js](standard_theme/static/js/switchers.js), which navigates on `change`, checking that the target page exists before leaving the current one.
 
