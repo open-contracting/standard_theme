@@ -114,7 +114,7 @@
         {# Hidden until switchers.js adds the options. A style attribute, because `.oc-switchers form` sets `display`. #}
         <form class="oc-version-switcher" style="display: none">
           <select class="oc-custom-select" name="branch">
-            <option>Version</option>
+            <option>{% trans %}Version{% endtrans %}</option>
           </select>
         </form>
         {% else %}
@@ -122,7 +122,7 @@
           <select class="oc-custom-select" name="branch" onchange="this.form.submit()">
             {% block version_options %}
             {# If the profile is versioned, use a server include #}
-            <option>Version</option>
+            <option>{% trans %}Version{% endtrans %}</option>
             <option value="latest">latest</option>
             {% endblock %}
           </select>  
@@ -137,7 +137,7 @@
         {# No action: switchers.js navigates, and the links below are the fallback. #}
         <form class="oc-language-switcher">
           <select class="oc-custom-select" name="lang">
-            <option>Language</option>
+            <option>{% trans %}Language{% endtrans %}</option>
             {% for code, name in theme_languages.items() %}
             <option value="{{ code }}">{{ name }}</option>
             {% endfor %}
@@ -153,7 +153,7 @@
         <form class="oc-language-switcher" method="get" action="{{ pathto('../switcher') }}">
           <select class="oc-custom-select" name="lang"{% if not theme_versions_url %} onchange="this.form.submit()"{% endif %}>
             {% block language_options %}
-            <option>Language</option>
+            <option>{% trans %}Language{% endtrans %}</option>
             <option value="en">English</option>
             {% endblock %}
           </select>  

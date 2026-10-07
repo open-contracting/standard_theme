@@ -200,3 +200,12 @@ def test_server_side_include_without_versions_url(tmp_path):
     build(tmp_path, FIXTURE_VERSIONS_URL="")
 
     assert '<!--#include virtual="$BANNER" -->' in (tmp_path / "index.html").read_text()
+
+
+# The placeholders are the only switcher text the theme writes, so they have to be translated.
+def test_placeholders_are_translated(tmp_path):
+    build(tmp_path, language="es")
+    html = (tmp_path / "index.html").read_text()
+
+    assert "<option>Versión</option>" in html
+    assert "<option>Idioma</option>" in html
