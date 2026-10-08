@@ -164,13 +164,13 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           {% block sidebartitle %}
-          <a href="{{ pathto(master_doc) }}">{% trans %}{{ project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}</small>{% endif %}</a>
+          <a href="{{ pathto(master_doc) }}">{% trans %}{{ project }}{% endtrans %}{% if theme_display_version|tobool %} <small>{{ release }}</small>{% endif %}</a>
           {% endblock %}
         </div>
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           {% block menu %}
-            {% set toctree = toctree(maxdepth=5, collapse=theme_collapse_navigation, includehidden=True) %}
+            {% set toctree = toctree(maxdepth=5, collapse=theme_collapse_navigation|tobool, includehidden=True) %}
             {% if toctree %}
                 {{ toctree }}
             {% else %}
@@ -196,7 +196,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
        {% block mobile_nav %}
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">{% trans theme_short_project=theme_short_project or project|replace("Open Contracting Data Standard", "OCDS") %}{{ theme_short_project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}</small>{% endif %}</a>
+        <a href="{{ pathto(master_doc) }}">{% trans theme_short_project=theme_short_project or project|replace("Open Contracting Data Standard", "OCDS") %}{{ theme_short_project }}{% endtrans %}{% if theme_display_version|tobool %} <small>{{ release }}</small>{% endif %}</a>
        {% endblock %}
       </nav>
 
@@ -253,7 +253,7 @@
   {% endif %}
 
   {# STICKY NAVIGATION #}
-  {% if theme_sticky_navigation %}
+  {% if theme_sticky_navigation|tobool %}
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.StickyNav.enable();
