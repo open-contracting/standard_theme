@@ -1,14 +1,10 @@
 import os
 
-import standard_theme
-
 project = "Test"
 copyright = "Open Contracting Partnership"
 
 html_theme = "standard_theme"
-html_theme_path = [standard_theme.get_html_theme_path()]
 templates_path = ["_templates"]
-locale_dirs = [os.path.join(standard_theme.get_html_theme_path(), "locale")]
 
 html_theme_options = {
     "root_url": "/profiles/test",

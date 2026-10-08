@@ -10,6 +10,7 @@ description = "Derived from ReadTheDocs.org theme for Sphinx, 2013 version."
 readme = "README.md"
 license = {text = "BSD"}
 urls = {Homepage = "https://github.com/open-contracting/standard_theme"}
+entry-points."sphinx.html_themes" = {standard_theme = "standard_theme"}
 classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
@@ -30,6 +31,7 @@ standard_theme = [
     "static/js/*.js",
     "static/images/*.png",
     "static/fonts/*.*",
+    "locale/*/LC_MESSAGES/*.mo",
 ]
 
 # Extraction from Jinja2 HTML templates

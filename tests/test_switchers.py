@@ -1,10 +1,12 @@
 """Test the banner and the switchers that switchers.js renders from a versions.json document."""
 
 import json
+from pathlib import Path
 
 import pytest
 from playwright.sync_api import expect
 
+import standard_theme
 from tests.conftest import build
 
 CUSTOM_BANNER = "A banner from the documentation repository."
@@ -209,3 +211,22 @@ def test_placeholders_are_translated(tmp_path):
 
     assert "<option>Versión</option>" in html
     assert "<option>Idioma</option>" in html
+
+
+# The catalogs have to be inside the package: setup() registers this directory, and a non-editable install only
+# ships what is under it.
+def test_catalogs_are_packaged():
+    package = Path(standard_theme.__file__).parent
+
+    assert sorted(p.name for p in (package / "locale").iterdir() if p.is_dir()) == [
+        "es",
+        "fr",
+    ]
+    assert (
+        '"locale/*/LC_MESSAGES/*.mo",'
+        in (package.parent / "pyproject.toml").read_text()
+    )
+    assert (
+        'entry-points."sphinx.html_themes"'
+        in (package.parent / "pyproject.toml").read_text()
+    )

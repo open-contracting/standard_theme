@@ -112,6 +112,6 @@ Commit changes:
 ## Translations
 
 ```shell
-pybabel extract . -F pyproject.toml -o locale/sphinx.pot -k '_ l_ lazy_gettext'
-pybabel update -N -i locale/sphinx.pot -d locale -D sphinx
+pybabel extract . -F pyproject.toml -o standard_theme/locale/sphinx.pot -k '_ l_ lazy_gettext'
+pybabel update -N -i standard_theme/locale/sphinx.pot -d standard_theme/locale -D sphinx
 ```
