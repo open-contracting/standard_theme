@@ -9,7 +9,10 @@ jobs:
     permissions:
       contents: read
     with:
+      # Check the committed .mo files before `pybabel update` rewrites the .po files' headers.
       command: |
+        pybabel compile -d standard_theme/locale -D sphinx
+        git diff --exit-code -- '*.mo'
         pybabel extract -F pyproject.toml -o standard_theme/locale/sphinx.pot -k '_ l_ lazy_gettext' .
         pybabel update -N -i standard_theme/locale/sphinx.pot -d standard_theme/locale -D sphinx
       dependencies: jinja2
