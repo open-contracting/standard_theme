@@ -22,11 +22,6 @@ function ThemeNav () {
         if (!self.isRunning) {
             self.isRunning = true;
             jQuery(function ($) {
-                self.init($);
-
-                self.reset();
-                self.win.on('hashchange', self.reset);
-
                 // Set scroll monitor
                 self.win.on('scroll', function () {
                     if (!self.linkScroll) {
@@ -89,6 +84,9 @@ function ThemeNav () {
             });
             link.prepend(expand);
         });
+
+        this.reset();
+        this.win.on('hashchange', this.reset);
     };
 
     nav.reset = function () {
@@ -152,6 +150,11 @@ module.exports.ThemeNav = ThemeNav();
 
 if (typeof(window) != 'undefined') {
     window.SphinxRtdTheme = { StickyNav: module.exports.ThemeNav };
+
+    // Run before StickyNav.enable(), which the layout calls on ready after this script, as enable() uses init()'s state.
+    jQuery(function ($) {
+        module.exports.ThemeNav.init($);
+    });
 }
 
 },{"jquery":"jquery"}]},{},["sphinx-rtd-theme"]);
