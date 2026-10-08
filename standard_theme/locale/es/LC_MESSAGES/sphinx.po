@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-07 16:11-0400\n"
+"POT-Creation-Date: 2026-10-08 15:15-0400\n"
 "PO-Revision-Date: 2016-04-03 00:06+0000\n"
 "Last-Translator: Oscar Montiel <miguel.montiel@gmail.com>\n"
 "Language: es\n"
@@ -49,68 +49,72 @@ msgstr ""
 "href=\"%(theme_license_url)s\">%(theme_license_name)s</a>, <a "
 "href=\"%(theme_repository_url)s\">fuente disponible en GitHub</a>."
 
-#: standard_theme/layout.html:39 standard_theme/layout_old.html:122
+#: standard_theme/footer.html:18
+msgid "Privacy notice"
+msgstr "Aviso de privacidad"
+
+#: standard_theme/layout.html:37 standard_theme/layout_old.html:122
 #, python-format
 msgid "Search within %(docstitle)s"
 msgstr "Buscar en %(docstitle)s"
 
-#: standard_theme/layout.html:62 standard_theme/layout_old.html:131
+#: standard_theme/layout.html:60 standard_theme/layout_old.html:131
 msgid "About these documents"
 msgstr "Sobre este documento"
 
-#: standard_theme/layout.html:66 standard_theme/layout_old.html:134
+#: standard_theme/layout.html:64 standard_theme/layout_old.html:134
 msgid "Index"
 msgstr "Índice"
 
-#: standard_theme/layout.html:70 standard_theme/layout_old.html:137
+#: standard_theme/layout.html:68 standard_theme/layout_old.html:137
 #: standard_theme/search.html:11 standard_theme/searchbox.html:5
 msgid "Search"
 msgstr "Búsqueda"
 
-#: standard_theme/layout.html:73 standard_theme/layout_old.html:140
+#: standard_theme/layout.html:71 standard_theme/layout_old.html:140
 msgid "Copyright"
 msgstr "Copyright"
 
-#: standard_theme/layout.html:117 standard_theme/layout.html:125
+#: standard_theme/layout.html:115 standard_theme/layout.html:123
 msgid "Version"
 msgstr "Versión"
 
-#: standard_theme/layout.html:130 standard_theme/layout.html:161
+#: standard_theme/layout.html:128 standard_theme/layout.html:159
 msgid "Go"
 msgstr "Ir a"
 
-#: standard_theme/layout.html:140 standard_theme/layout.html:156
+#: standard_theme/layout.html:138 standard_theme/layout.html:154
 msgid "Language"
 msgstr "Idioma"
 
-#: standard_theme/layout.html:169
+#: standard_theme/layout.html:167
 #, python-format
 msgid "%(project)s"
 msgstr "%(project)s"
 
-#: standard_theme/layout.html:186
+#: standard_theme/layout.html:184
 msgid "Developed by"
 msgstr "Desarrollado por"
 
-#: standard_theme/layout.html:201
+#: standard_theme/layout.html:199
 #, python-format
 msgid "%(theme_short_project)s"
 msgstr "%(theme_short_project)s"
 
-#: standard_theme/layout.html:247
+#: standard_theme/layout.html:245
 msgid "This is an old version of the documentation."
 msgstr "Esta es una versión antigua de la documentación."
 
-#: standard_theme/layout.html:248
+#: standard_theme/layout.html:246
 #, python-format
 msgid "Go to the latest version: %(version)s."
 msgstr "Ir a la última versión: %(version)s."
 
-#: standard_theme/layout.html:249
+#: standard_theme/layout.html:247
 msgid "This is a development copy of the documentation."
 msgstr "Esta es una copia de desarrollo de la documentación."
 
-#: standard_theme/layout.html:250
+#: standard_theme/layout.html:248
 msgid "Go to the live version."
 msgstr "Ir a la versión publicada."
 

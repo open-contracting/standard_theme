@@ -13,7 +13,9 @@
   <hr/>
 
   <div role="contentinfo">
-      {% trans theme_copyright=theme_copyright|e, theme_license_url=theme_license_url|e, theme_license_name=theme_license_name|e, theme_repository_url=theme_repository_url|e %}Copyright (c) {{ theme_copyright }}, and released under the <a href="{{ theme_license_url }}">{{ theme_license_name }}</a>, <a href="{{ theme_repository_url }}">source available on GitHub</a>.{% endtrans %}
-      {%- block extrafooter %} {% endblock %}
+      {% trans theme_copyright=theme_copyright|e, theme_license_url=(theme_license_url or theme_repository_url and theme_repository_url ~ "/blob/HEAD/LICENSE")|e, theme_license_name=theme_license_name|e, theme_repository_url=theme_repository_url|e %}Copyright (c) {{ theme_copyright }}, and released under the <a href="{{ theme_license_url }}">{{ theme_license_name }}</a>, <a href="{{ theme_repository_url }}">source available on GitHub</a>.{% endtrans %}
+      {%- block extrafooter %}
+      <a href="https://www.open-contracting.org/terms-of-use/">{% trans %}Privacy notice{% endtrans %}</a>.
+      {%- endblock %}
   </div>
 </footer>

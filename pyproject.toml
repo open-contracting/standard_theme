@@ -29,6 +29,7 @@ standard_theme = [
     "*.html",
     "static/css/*.css",
     "static/js/*.js",
+    "static/*.ico",
     "static/images/*.png",
     "static/fonts/*.*",
     "locale/*/LC_MESSAGES/*.mo",

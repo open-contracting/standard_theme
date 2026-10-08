@@ -27,9 +27,7 @@
   {% endblock %}
 
   {# FAVICON #}
-  {% if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
-  {% endif %}
+  <link rel="shortcut icon" href="{{ pathto('_static/' + (favicon or 'favicon-16x16.ico'), 1) }}"/>
 
   {# CSS #}
 
@@ -198,7 +196,7 @@
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
        {% block mobile_nav %}
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="{{ pathto(master_doc) }}">{% trans %}{{ theme_short_project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}</small>{% endif %}</a>
+        <a href="{{ pathto(master_doc) }}">{% trans theme_short_project=theme_short_project or project|replace("Open Contracting Data Standard", "OCDS") %}{{ theme_short_project }}{% endtrans %}{% if theme_display_version %} <small>{{ release }}</small>{% endif %}</a>
        {% endblock %}
       </nav>
 
