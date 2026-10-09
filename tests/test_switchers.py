@@ -1,6 +1,7 @@
 """Test the banner and the switchers that switchers.js renders from a versions.json document."""
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -211,6 +212,15 @@ def test_placeholders_are_translated(tmp_path):
 
     assert "<option>Versión</option>" in html
     assert "<option>Idioma</option>" in html
+
+
+# Sphinx appends a checksum to the URL of a file it registers, which a hand-written <script> tag doesn't get.
+def test_switchers_js_is_cache_busted(site):
+    html = (site / "profiles/test/latest/en/index.html").read_text()
+
+    assert re.search(
+        r'<script defer="defer" src="[^"]*_static/js/switchers\.js\?v=[0-9a-f]+">', html
+    )
 
 
 # The catalogs have to be inside the package: setup() registers this directory, and a non-editable install only
