@@ -15,9 +15,14 @@ def get_html_theme_path():
 
 
 def add_js_files(app):
-    """Register switchers.js, so that Sphinx appends a checksum to its URL."""
-    if app.config.html_theme == "standard_theme":
-        app.add_js_file("js/switchers.js", defer="defer")
+    """Register the theme's scripts, so that Sphinx appends a checksum to each URL."""
+    if app.config.html_theme != "standard_theme":
+        return
+
+    # theme.js reads window.jQuery as it loads, and the sticky navigation calls into it, so it must come last.
+    if not os.environ.get("READTHEDOCS"):
+        app.add_js_file("js/theme.js", priority=800)
+    app.add_js_file("js/switchers.js", defer="defer")
 
 
 def setup(app):
