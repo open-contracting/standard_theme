@@ -12,7 +12,7 @@
 {%- endif %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html{% if language is not none %} lang="{{ language }}"{% endif %}>
 <head>
 
   <script src="https://use.typekit.net/xpw3jps.js"></script>
