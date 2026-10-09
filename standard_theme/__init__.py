@@ -8,19 +8,6 @@ From https://github.com/ryan-roemer/sphinx-bootstrap-theme.
 
 import os
 
-from sphinx.util.logging import getLogger
-
-logger = getLogger(__name__)
-
-
-def get_html_theme_path():
-    """Return list of HTML theme paths. Deprecated: setting html_theme_path stops setup() from running."""
-    logger.warning(
-        "Calling get_html_theme_path is deprecated: remove it and html_theme_path, so that the theme is found "
-        "through its entry point. Found by path, it registers neither its scripts nor its message catalogs."
-    )
-    return os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-
 
 def add_js_files(app):
     """Register the theme's scripts, so that Sphinx appends a checksum to each URL."""
