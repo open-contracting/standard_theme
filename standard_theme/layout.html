@@ -12,8 +12,7 @@
 {%- endif %}
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html lang="en">
 <head>
 
   <script src="https://use.typekit.net/xpw3jps.js"></script>
@@ -82,9 +81,6 @@
     {%- endif %}
   {%- endblock %}
   {%- block extrahead %} {% endblock %}
-
-  {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
-  <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
 
   <script src="https://cdn.usefathom.com/script.js" data-site="{{ theme_analytics_id }}" defer data-excluded-domains="localhost,127.0.0.1,0.0.0.0"></script>
 </head>
