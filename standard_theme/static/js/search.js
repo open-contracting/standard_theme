@@ -1,35 +1,25 @@
-$(document).ready(function () {
-  var parameters = {};
-
-  // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams not fully supported.
-  location.search.substr(1).split('&').forEach(function (pair) {
-    var parts = pair.split('=');
-    parameters[parts[0]] = parts[1];
-  });
-
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent#Decoding_query_parameters_from_a_URL
-  $('#rtd-search-form input[name="q"]').val(decodeURIComponent(parameters.q.replace(/\+/g, ' ')));
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('#rtd-search-form input[name="q"]').value = new URLSearchParams(location.search).get('q') || '';
 
   render();
 });
 
 function render() {
-  var query = $('#rtd-search-form input[name="q"]').val();
+  var query = document.querySelector('#rtd-search-form input[name="q"]').value;
   var position = location.href.indexOf('/search/?');
   // OCDS Index indexes each language directory separately, under a base URL that omits the language code.
   var baseUrl = location.href.substring(0, position - 2);
   var language = location.href.substring(position - 2, position);
 
-  $.ajax({
-    url: 'https://standard.open-contracting.org/search/ocdsindex_' + language + '/_search?size=100',
+  fetch('https://standard.open-contracting.org/search/ocdsindex_' + language + '/_search?size=100', {
+    method: 'POST',
     // The "public" user has read-only access to Elasticsearch indices created by OCDS Index. We set a password
     // only to limit the impact of untargeted scans (e.g. bots).
     headers: {
-      Authorization: 'Basic ' + btoa('public:G*PweUnH4u@r') // IE > 9
+      Authorization: 'Basic ' + btoa('public:G*PweUnH4u@r'),
+      'Content-Type': 'application/json'
     },
-    method: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({
+    body: JSON.stringify({
       "query": {
         "bool": {
           "must": {
@@ -54,37 +44,41 @@ function render() {
           "title": {}
         }
       }
-    }),
-    success: function (data) {
-      $('#search-results').hide();
-
-      $('#search-results').html('<div id="results-count"></div><ul id="results-list" class="search"></ul>');
-
-      var message = 'Search finished, found ${resultCount} page(s) matching the search query.';
-
-      var countHtml = Documentation.gettext(message).replace('${resultCount}', data.hits.total.value.toString());
-
-      var listHtml = '';
-      data.hits.hits.forEach(function (hit) {
-        var parts = hit._source.url.split('#');
-        var highlights = hit.highlight.text || hit.highlight.title;
-
-        listHtml += '<li>';
-        listHtml += '<a href="' + parts[0] + '?highlight=' + encodeURIComponent(query) + '#' + parts[1] + '">';
-        listHtml += $("<div>").text(hit._source.title).html();
-        listHtml += '</a>';
-        listHtml += '<div class="context">';
-        highlights.forEach(function (highlight) {
-          listHtml += highlight + ' ';
-        });
-        listHtml += '</div>';
-        listHtml += '</li>';
-      });
-
-      $('#results-count').html(countHtml);
-      $('#results-list').html(listHtml);
-
-      $('#search-results').show();
+    })
+  }).then(function (response) {
+    if (!response.ok) {
+      throw new Error('Search failed: ' + response.status);
     }
+    return response.json();
+  }).then(function (data) {
+    var results = document.getElementById('search-results');
+    results.style.display = 'none';
+
+    results.innerHTML = '<div id="results-count"></div><ul id="results-list" class="search"></ul>';
+
+    var messages = JSON.parse(document.getElementById('search-messages').textContent);
+    var total = data.hits.total.value;
+
+    var list = document.getElementById('results-list');
+    data.hits.hits.forEach(function (hit) {
+      var parts = hit._source.url.split('#');
+      var highlights = hit.highlight.text || hit.highlight.title;
+
+      var item = document.createElement('li');
+      var link = document.createElement('a');
+      link.href = parts[0] + '?highlight=' + encodeURIComponent(query) + '#' + parts[1];
+      link.textContent = hit._source.title;
+      item.appendChild(link);
+      var context = document.createElement('div');
+      context.className = 'context';
+      // Elasticsearch's highlights are HTML, with <em> around matches.
+      context.innerHTML = highlights.join(' ') + ' ';
+      item.appendChild(context);
+      list.appendChild(item);
+    });
+
+    document.getElementById('results-count').textContent = (total === 1 ? messages.one : messages.other).replace('${resultCount}', total);
+
+    results.style.display = '';
   });
 }

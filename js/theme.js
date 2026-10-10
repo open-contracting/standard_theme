@@ -1,11 +1,35 @@
-var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
+// Run the callback once the DOM is ready, in the order that callbacks are registered.
+function onReady (callback) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', callback);
+    } else {
+        callback();
+    }
+}
+
+function toggleClass (selector, className) {
+    document.querySelectorAll(selector).forEach(function (element) {
+        element.classList.toggle(className);
+    });
+}
+
+function removeClass (elements, className) {
+    elements.forEach(function (element) {
+        element.classList.remove(className);
+    });
+}
+
+function siblings (element) {
+    return Array.prototype.filter.call(element.parentNode.children, function (sibling) {
+        return sibling !== element;
+    });
+}
 
 // Sphinx theme nav state
 function ThemeNav () {
 
     var nav = {
         navBar: null,
-        win: null,
         winScroll: false,
         winResize: false,
         linkScroll: false,
@@ -20,9 +44,9 @@ function ThemeNav () {
 
         if (!self.isRunning) {
             self.isRunning = true;
-            jQuery(function ($) {
+            onReady(function () {
                 // Set scroll monitor
-                self.win.on('scroll', function () {
+                window.addEventListener('scroll', function () {
                     if (!self.linkScroll) {
                         self.winScroll = true;
                     }
@@ -30,7 +54,7 @@ function ThemeNav () {
                 setInterval(function () { if (self.winScroll) self.onScroll(); }, 25);
 
                 // Set resize monitor
-                self.win.on('resize', function () {
+                window.addEventListener('resize', function () {
                     self.winResize = true;
                 });
                 setInterval(function () { if (self.winResize) self.onResize(); }, 25);
@@ -39,53 +63,67 @@ function ThemeNav () {
         };
     };
 
-    nav.init = function ($) {
-        var doc = $(document),
-            self = this;
+    nav.init = function () {
+        var self = this;
 
-        this.navBar = $('div.wy-side-scroll:first');
-        this.win = $(window);
+        this.navBar = document.querySelector('div.wy-side-scroll');
 
         // Set up javascript UX bits
-        $(document)
+        document.addEventListener('click', function (event) {
+            var target = event.target;
+
             // Shift nav in mobile when clicking the menu.
-            .on('click', "[data-toggle='wy-nav-top']", function() {
-                $("[data-toggle='wy-nav-shift']").toggleClass("shift");
-                $("[data-toggle='rst-versions']").toggleClass("shift");
-            })
+            if (target.closest("[data-toggle='wy-nav-top']")) {
+                toggleClass("[data-toggle='wy-nav-shift']", 'shift');
+                toggleClass("[data-toggle='rst-versions']", 'shift');
+            }
 
             // Nav menu link click operations
-            .on('click', ".wy-menu-vertical .current ul li a", function() {
-                var target = $(this);
+            var link = target.closest('.wy-menu-vertical .current ul li a');
+            if (link) {
                 // Close menu when you click a link.
-                $("[data-toggle='wy-nav-shift']").removeClass("shift");
-                $("[data-toggle='rst-versions']").toggleClass("shift");
+                removeClass(document.querySelectorAll("[data-toggle='wy-nav-shift']"), 'shift');
+                toggleClass("[data-toggle='rst-versions']", 'shift');
                 // Handle dynamic display of l3 and l4 nav lists
-                self.toggleCurrent(target);
+                self.toggleCurrent(link);
                 self.hashChange();
-            })
-            .on('click', "[data-toggle='rst-current-version']", function() {
-                $("[data-toggle='rst-versions']").toggleClass("shift-up");
-            })
+            }
+
+            if (target.closest("[data-toggle='rst-current-version']")) {
+                toggleClass("[data-toggle='rst-versions']", 'shift-up');
+            }
+        });
 
         // Make tables responsive
-        $("table.docutils:not(.field-list)")
-            .wrap("<div class='wy-table-responsive'></div>");
+        document.querySelectorAll('table.docutils:not(.field-list)').forEach(function (table) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'wy-table-responsive';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
 
         // Add expand links to all parents of nested ul
-        $('.wy-menu-vertical ul').not('.simple').siblings('a').each(function () {
-            var link = $(this);
-                expand = $('<span class="toctree-expand"></span>');
-            expand.on('click', function (ev) {
+        var links = new Set();
+        document.querySelectorAll('.wy-menu-vertical ul:not(.simple)').forEach(function (ul) {
+            siblings(ul).forEach(function (sibling) {
+                if (sibling.tagName === 'A') {
+                    links.add(sibling);
+                }
+            });
+        });
+        links.forEach(function (link) {
+            var expand = document.createElement('span');
+            expand.className = 'toctree-expand';
+            expand.addEventListener('click', function (event) {
                 self.toggleCurrent(link);
-                ev.stopPropagation();
-                return false;
+                event.stopPropagation();
+                event.preventDefault();
             });
             link.prepend(expand);
         });
 
         this.reset();
-        this.win.on('hashchange', this.reset);
+        window.addEventListener('hashchange', this.reset);
     };
 
     nav.reset = function () {
@@ -93,14 +131,16 @@ function ThemeNav () {
         var anchor = encodeURI(window.location.hash);
         if (anchor) {
             try {
-                var link = $('.wy-menu-vertical')
-                    .find('[href="' + anchor + '"]');
-                $('.wy-menu-vertical li.toctree-l1 li.current')
-                    .removeClass('current');
-                link.closest('li.toctree-l2').addClass('current');
-                link.closest('li.toctree-l3').addClass('current');
-                link.closest('li.toctree-l4').addClass('current');
-                link.closest('li.toctree-l5').addClass('current');
+                var links = document.querySelectorAll('.wy-menu-vertical [href="' + anchor + '"]');
+                removeClass(document.querySelectorAll('.wy-menu-vertical li.toctree-l1 li.current'), 'current');
+                links.forEach(function (link) {
+                    ['toctree-l2', 'toctree-l3', 'toctree-l4', 'toctree-l5'].forEach(function (level) {
+                        var item = link.closest('li.' + level);
+                        if (item) {
+                            item.classList.add('current');
+                        }
+                    });
+                });
             }
             catch (err) {
                 console.log("Error expanding nav for anchor", err);
@@ -110,36 +150,41 @@ function ThemeNav () {
 
     nav.onScroll = function () {
         this.winScroll = false;
-        var newWinPosition = this.win.scrollTop(),
+        var newWinPosition = window.scrollY,
             winBottom = newWinPosition + this.winHeight,
-            navPosition = this.navBar.scrollTop(),
+            navPosition = this.navBar.scrollTop,
             newNavPosition = navPosition + (newWinPosition - this.winPosition);
         if (newWinPosition < 0 || winBottom > this.docHeight) {
             return;
         }
-        this.navBar.scrollTop(newNavPosition);
+        this.navBar.scrollTop = newNavPosition;
         this.winPosition = newWinPosition;
     };
 
     nav.onResize = function () {
         this.winResize = false;
-        this.winHeight = this.win.height();
-        this.docHeight = $(document).height();
+        this.winHeight = document.documentElement.clientHeight;
+        this.docHeight = document.documentElement.scrollHeight;
     };
 
     nav.hashChange = function () {
+        var self = this;
         this.linkScroll = true;
-        this.win.one('hashchange', function () {
-            this.linkScroll = false;
-        });
+        window.addEventListener('hashchange', function () {
+            self.linkScroll = false;
+        }, { once: true });
     };
 
     nav.toggleCurrent = function (elem) {
         var parent_li = elem.closest('li');
-        parent_li.siblings('li.current').removeClass('current');
-        parent_li.siblings().find('li.current').removeClass('current');
-        parent_li.find('> ul li.current').removeClass('current');
-        parent_li.toggleClass('current');
+        siblings(parent_li).forEach(function (sibling) {
+            if (sibling.matches('li.current')) {
+                sibling.classList.remove('current');
+            }
+            removeClass(sibling.querySelectorAll('li.current'), 'current');
+        });
+        removeClass(parent_li.querySelectorAll(':scope > ul li.current'), 'current');
+        parent_li.classList.toggle('current');
     }
 
     return nav;
@@ -151,7 +196,7 @@ if (typeof(window) != 'undefined') {
     window.SphinxRtdTheme = { StickyNav: module.exports.ThemeNav };
 
     // Run before StickyNav.enable(), which the layout calls on ready after this script, as enable() uses init()'s state.
-    jQuery(function ($) {
-        module.exports.ThemeNav.init($);
+    onReady(function () {
+        module.exports.ThemeNav.init();
     });
 }

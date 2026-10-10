@@ -91,7 +91,6 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
-          external: ['jquery'],
           alias: {
             'sphinx-rtd-theme': './js/theme.js'
           }
@@ -101,7 +100,6 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          external: ['jquery'],
           alias: {
             'sphinx-rtd-theme': './js/theme.js'
           }

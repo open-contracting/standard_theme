@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-08 15:15-0400\n"
+"POT-Creation-Date: 2026-10-09 15:22-0400\n"
 "PO-Revision-Date: 2016-04-03 00:06+0000\n"
 "Last-Translator: Oscar Montiel <miguel.montiel@gmail.com>\n"
 "Language: es\n"
@@ -53,68 +53,68 @@ msgstr ""
 msgid "Privacy notice"
 msgstr "Aviso de privacidad"
 
-#: standard_theme/layout.html:37 standard_theme/layout_old.html:122
+#: standard_theme/layout.html:36 standard_theme/layout_old.html:122
 #, python-format
 msgid "Search within %(docstitle)s"
 msgstr "Buscar en %(docstitle)s"
 
-#: standard_theme/layout.html:60 standard_theme/layout_old.html:131
+#: standard_theme/layout.html:59 standard_theme/layout_old.html:131
 msgid "About these documents"
 msgstr "Sobre este documento"
 
-#: standard_theme/layout.html:64 standard_theme/layout_old.html:134
+#: standard_theme/layout.html:63 standard_theme/layout_old.html:134
 msgid "Index"
 msgstr "Índice"
 
-#: standard_theme/layout.html:68 standard_theme/layout_old.html:137
+#: standard_theme/layout.html:67 standard_theme/layout_old.html:137
 #: standard_theme/search.html:11 standard_theme/searchbox.html:5
 msgid "Search"
 msgstr "Búsqueda"
 
-#: standard_theme/layout.html:71 standard_theme/layout_old.html:140
+#: standard_theme/layout.html:70 standard_theme/layout_old.html:140
 msgid "Copyright"
 msgstr "Copyright"
 
-#: standard_theme/layout.html:115 standard_theme/layout.html:123
+#: standard_theme/layout.html:111 standard_theme/layout.html:119
 msgid "Version"
 msgstr "Versión"
 
-#: standard_theme/layout.html:128 standard_theme/layout.html:159
+#: standard_theme/layout.html:124 standard_theme/layout.html:155
 msgid "Go"
 msgstr "Ir a"
 
-#: standard_theme/layout.html:138 standard_theme/layout.html:154
+#: standard_theme/layout.html:134 standard_theme/layout.html:150
 msgid "Language"
 msgstr "Idioma"
 
-#: standard_theme/layout.html:167
+#: standard_theme/layout.html:163
 #, python-format
 msgid "%(project)s"
 msgstr "%(project)s"
 
-#: standard_theme/layout.html:184
+#: standard_theme/layout.html:180
 msgid "Developed by"
 msgstr "Desarrollado por"
 
-#: standard_theme/layout.html:199
+#: standard_theme/layout.html:195
 #, python-format
 msgid "%(theme_short_project)s"
 msgstr "%(theme_short_project)s"
 
-#: standard_theme/layout.html:245
+#: standard_theme/layout.html:236
 msgid "This is an old version of the documentation."
 msgstr "Esta es una versión antigua de la documentación."
 
-#: standard_theme/layout.html:246
+#: standard_theme/layout.html:237
 #, python-format
 msgid "Go to the latest version: %(version)s."
 msgstr "Ir a la última versión: %(version)s."
 
-#: standard_theme/layout.html:247
+#: standard_theme/layout.html:238
 msgid "This is a development copy of the documentation."
 msgstr "Esta es una copia de desarrollo de la documentación."
 
-#: standard_theme/layout.html:248
+#: standard_theme/layout.html:239
 msgid "Go to the live version."
 msgstr "Ir a la versión publicada."
 
@@ -146,7 +146,16 @@ msgstr ""
 "Creado con <a href=\"http://sphinx-doc.org/\">Sphinx</a> "
 "%(sphinx_version)s."
 
-#: standard_theme/search.html:27
+#: standard_theme/search.html:19
+msgid "Search finished, found one page matching the search query."
+msgstr "Búsqueda finalizada, se encontró una página que coincide con la consulta de búsqueda."
+
+#: standard_theme/search.html:20
+#, python-brace-format
+msgid "Search finished, found ${resultCount} pages matching the search query."
+msgstr "Búsqueda finalizada, se encontraron ${resultCount} páginas que coinciden con la consulta de búsqueda."
+
+#: standard_theme/search.html:33
 msgid ""
 "Please activate JavaScript to enable the search\n"
 "      functionality."

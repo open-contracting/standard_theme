@@ -11,9 +11,8 @@ import os
 
 def add_js_files(app):
     """Register the theme's scripts, so that Sphinx appends a checksum to each URL."""
-    # theme.js reads window.jQuery as it loads, and the sticky navigation calls into it, so it must come last.
     if not os.environ.get("READTHEDOCS"):
-        app.add_js_file("js/theme.js", priority=800)
+        app.add_js_file("js/theme.js")
     app.add_js_file("js/switchers.js", defer="defer")
 
 
