@@ -95,7 +95,7 @@ def test_search(page, server):
         "example query"
     )
     expect(page.locator("#results-count")).to_have_text(
-        "Search finished, found one page matching the search query."
+        "Found one page matching the search query."
     )
 
     link = page.locator("#results-list a")
@@ -127,5 +127,5 @@ def test_search_translated(page, server):
     page.goto(f"{server}/profiles/test/latest/es/search/?q=ejemplo")
 
     expect(page.locator("#results-count")).to_have_text(
-        "Búsqueda finalizada, se encontraron 2 páginas que coinciden con la consulta de búsqueda."
+        "Se encontraron 2 páginas que coinciden con la consulta de búsqueda."
     )

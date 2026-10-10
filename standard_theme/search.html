@@ -16,8 +16,8 @@
 {% block footer %}
   <script type="application/json" id="search-messages">
     {
-      "one": {{ _("Search finished, found one page matching the search query.")|tojson }},
-      "other": {{ _("Search finished, found ${resultCount} pages matching the search query.")|tojson }}
+      "one": {{ _("Found one page matching the search query.")|tojson }},
+      "other": {{ _("Found ${resultCount} pages matching the search query.")|tojson }}
     }
   </script>
   <script type="text/javascript" src="{{ pathto('_static/js/search.js', 1) }}"></script>

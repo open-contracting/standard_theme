@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-09 15:22-0400\n"
+"POT-Creation-Date: 2026-10-10 00:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,12 +137,12 @@ msgid ""
 msgstr ""
 
 #: standard_theme/search.html:19
-msgid "Search finished, found one page matching the search query."
+msgid "Found one page matching the search query."
 msgstr ""
 
 #: standard_theme/search.html:20
 #, python-brace-format
-msgid "Search finished, found ${resultCount} pages matching the search query."
+msgid "Found ${resultCount} pages matching the search query."
 msgstr ""
 
 #: standard_theme/search.html:33

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  open-contracting-standard-theme\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-09 15:22-0400\n"
+"POT-Creation-Date: 2026-10-10 00:41-0400\n"
 "PO-Revision-Date: 2016-04-03 00:06+0000\n"
 "Last-Translator: Oscar Montiel <miguel.montiel@gmail.com>\n"
 "Language: es\n"
@@ -147,13 +147,13 @@ msgstr ""
 "%(sphinx_version)s."
 
 #: standard_theme/search.html:19
-msgid "Search finished, found one page matching the search query."
-msgstr "Búsqueda finalizada, se encontró una página que coincide con la consulta de búsqueda."
+msgid "Found one page matching the search query."
+msgstr "Se encontró una página que coincide con la consulta de búsqueda."
 
 #: standard_theme/search.html:20
 #, python-brace-format
-msgid "Search finished, found ${resultCount} pages matching the search query."
-msgstr "Búsqueda finalizada, se encontraron ${resultCount} páginas que coinciden con la consulta de búsqueda."
+msgid "Found ${resultCount} pages matching the search query."
+msgstr "Se encontraron ${resultCount} páginas que coinciden con la consulta de búsqueda."
 
 #: standard_theme/search.html:33
 msgid ""
